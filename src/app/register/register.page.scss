@@ -1,0 +1,42 @@
+ion-toolbar{
+    --background: #ffffff;
+
+    ion-button{
+        text-transform:initial;
+        font-size:17px;
+    }
+}
+ion-content{
+    --background: #ffffff;
+    #header{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        h1{
+            font-weight: 700;
+            font-size: 36px;
+            color: #2f2e41;
+            margin-top: 10%;
+        }
+        img {
+            width: 340px;
+            height: 118px;
+            border: 0;
+            margin-top: 15%;
+        }
+    }
+    #form{
+        margin-top:16%;
+        padding-left: 30px;
+        padding-right: 30px;
+
+        h3{
+            font-weight: 500;
+            font-size: 18px;
+            // margin-top:15%;
+        }
+        ion-label{
+            font-size: 15px;
+        }
+    }
+}

@@ -1,27 +1,68 @@
-#container {
-  text-align: center;
+ion-toolbar{
+  --background: #ffffff;
+  
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  ion-button{
+      text-transform:initial;
+      font-size:17px;
+  }
 }
+ion-content{
+  --background: #ffffff;
+  #header{
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      h1{
+          font-weight: 700;
+          font-size: 30px;
+          color: #2f2e41;
+          margin-top: 8%;
+      }
+      #masLejos{
+        margin-top: 0%;
+      }
+      img {
+          // max-width: 64%;
+          width: 340px;
+          height: 118px;
+          border: 0;
+          margin-top: 0px;
+      }
+      #icono{
+          width: 180px;
+          height: 180px;
+          border: 0;
+          margin-top: 18%;
+      }
+  }
+  #form{
+      
+      padding-left: 30px;
+      padding-right: 30px;
+      margin-bottom: 10px;
+      padding-bottom: 20px;
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+      h3{
+          margin-top:15%;
+          display:flex;
+          flex-direction: column;
+          align-items: center;
+          font-weight: 500;
+          font-size: 18px;
+        
+      }
+      
+      #btn-registrar{
+          // padding-left: 30px;
+          // padding-right: 30px;  
+          margin-top:5%;
+          height: 52px;
+          font-size:18px;
+          text-transform: initial;
+          border-radius: 50px;
+          box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.05);
+          --box-shadow:none;
+      }
+    }
 }

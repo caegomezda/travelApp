@@ -1,0 +1,28 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="ion-no-border">
+   <ion-buttons slot="start">
+     <ion-button routerLink="/home" color="primary">
+       <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+      
+   </ion-buttons>
+   <ion-buttons slot="end">
+     <ion-button class="regular" routerLink="/register">Registrar</ion-button>
+   </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <div id="header">
+   <img src="assets/logotipo-travel.png" />
+   <h1 class="titulo">Inicia sesion</h1>
+ </div>
+
+ <form id="form">
+  <h3 class="regular">Correo electronico:</h3>
+  <app-input placeholder="Correo electronico"></app-input>
+  <h3 class="regular">Contraseña:</h3>
+  <app-input type="password" placeholder="Contraseña"></app-input>
+  <app-button routerLink="/principal" texto="Iniciar sesión"></app-button>
+ </form>
+</ion-content>

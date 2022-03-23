@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "login_register",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
