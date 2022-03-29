@@ -30,7 +30,23 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },  {
+    path: 'driver',
+    loadChildren: () => import('./driver/driver.module').then( m => m.DriverPageModule)
   },
+  {
+    path: 'intermunicipal',
+    loadChildren: () => import('./intermunicipal/intermunicipal.module').then( m => m.IntermunicipalPageModule)
+  },
+  {
+    path: 'contac',
+    loadChildren: () => import('./contac/contac.module').then( m => m.ContacPageModule)
+  },
+  {
+    path: 'validate',
+    loadChildren: () => import('./validate/validate.module').then( m => m.ValidatePageModule)
+  },
+
   
 ];
 

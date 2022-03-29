@@ -10,17 +10,17 @@
         </ion-label>
       </div>
       
-      <ion-list class="menu-items" lines="none">
-        <ion-item routerLink="/profile">
+      <ion-list class="menu-items"  lines="none">
+        <ion-item (click)="OpenCloseMenu()"  routerLink="/profile">
           <ion-icon name="person-circle-outline"></ion-icon>Perfil
         </ion-item>
-        <ion-item>
-          <ion-icon name="navigate-circle-outline"></ion-icon>Viajes intermunicipales
+        <ion-item (click)="OpenCloseMenu()" routerLink="/intermunicipal">
+          <ion-icon  name="navigate-circle-outline"></ion-icon>Viajes intermunicipales
         </ion-item>
-        <ion-item>
+        <ion-item (click)="OpenCloseMenu()" routerLink="/contac">
           <ion-icon name="help-outline"></ion-icon>Ayuda
         </ion-item>
-        <ion-item routerLink="/home">
+        <ion-item (click)="OpenCloseMenu()" routerLink="/home">
           <ion-icon name="exit-outline"></ion-icon>Salir
         </ion-item>
       </ion-list>
