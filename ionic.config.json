@@ -1,0 +1,7 @@
+{
+  "name": "codigoMaps",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
