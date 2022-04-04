@@ -13,7 +13,7 @@
 
 <ion-content>
  <div id="header">
-   <img src="assets/logotipo-travel.png" />
+   <img src="assets/img/logotipo-travel.png" />
    <h1>Registrar</h1>
  </div>
 
@@ -26,7 +26,7 @@
     <app-input type="password" placeholder="Contraseña"></app-input>
     <ion-item >
       <ion-label >Acepto los terminos y condiciones <br>y politicas de privacidad</ion-label>
-      <ion-checkbox (ionChange)="recibirCheckbox($event)" [disabled]="deshabilitado" slot="start" [checked]="developer_checkbox"></ion-checkbox>
+      <!-- <ion-checkbox (ionChange)="recibirCheckbox($event)" [disabled]="deshabilitado" slot="start" [checked]="developer_checkbox"></ion-checkbox> -->
     </ion-item>
     <app-button routerLink="/principal" texto="Registrar"></app-button>
   </form>

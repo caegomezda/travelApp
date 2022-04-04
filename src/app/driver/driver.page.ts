@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ComponentsIonicService } from '../services/components-ionic.service';
+import { ComponentsIonicService } from '../zservices/components-ionic.service';
 
 @Component({
   selector: 'app-driver',
