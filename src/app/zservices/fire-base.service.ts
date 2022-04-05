@@ -4,6 +4,7 @@ import { User } from '../aInterfaces/fire-base-interface';
 
 
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class FireBaseService {
 
   currentUser: User = null;
-  constructor(
-    private afAuth: AngularFireAuth,
+
+  constructor(private afAuth: AngularFireAuth,
+              private afs: AngularFirestore,
   ) { 
     this.afAuth.onAuthStateChanged((user:any )=> {
       this.currentUser = user;
@@ -27,5 +29,26 @@ export class FireBaseService {
     return (this.currentUser.emailVerified !== false) ? true : false;
   }
 
+  async signUp(credentialForm){
+    let email = credentialForm.email
+    let password = credentialForm.password
+    const credential = await this.afAuth.createUserWithEmailAndPassword(
+      email,
+      password
+    );
+    const uid = credential.user.uid;
+    return this.afs.doc(
+    `user/${uid}`
+    ).set({
+      uid,
+      email:email,
+    });
+  }
+
+  async SendVerificationMail() {
+    return  (await this.afAuth.currentUser).sendEmailVerification().then(() => {
+      console.log('registro exitoso');
+    })
+  }
 }
 
