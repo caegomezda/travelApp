@@ -15,13 +15,11 @@ export class FireBaseService {
     private afAuth: AngularFireAuth,
   ) { 
     this.afAuth.onAuthStateChanged((user:any )=> {
-      // console.log('changed', user);
       this.currentUser = user;
     })
   }
 
   signIn({email, password}){
-    // console.log("sign in firebase");
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
