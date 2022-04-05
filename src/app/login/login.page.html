@@ -39,7 +39,7 @@
   
   <ion-list lines="none">
     <form [formGroup]="credentialForm">
-      <ion-item lines="none">
+      <ion-item color="ion-color-secondary-rgb" class="ion-margin-bottom" lines="none">
         <!-- <ion-input type="email" placeholder="{{'email_customer_id' | translate}}"></ion-input> -->
         <ion-input 
           type="text"
@@ -57,7 +57,7 @@
         <span *ngIf="email.errors?.email">Correo errado</span>
       </div>
       
-      <ion-item lines="none">
+      <ion-item color="ion-color-secondary-rgb" class="ion-margin-bottom" lines="none">
         <!-- <ion-input type="text" placeholder="{{'enter_mpin' | translate}}"></ion-input> -->
         <ion-input 
           type="password" 

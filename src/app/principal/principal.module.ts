@@ -9,6 +9,7 @@ import { PrincipalPageRoutingModule } from './principal-routing.module';
 import { PrincipalPage } from './principal.page';
 import { InputModule } from '../components/input/input.module';
 import { ButtonModule } from '../components/button/button.module';
+import { MenuModule } from '../components/menu/menu.module';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ButtonModule } from '../components/button/button.module';
     IonicModule,
     InputModule,
     ButtonModule,
+    MenuModule,
     PrincipalPageRoutingModule
   ],
   declarations: [PrincipalPage]

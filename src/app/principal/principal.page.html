@@ -1,17 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons color="primary" slot="start">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
+      <ion-menu-button menu="main-menu">
+        <!-- <app-menu></app-menu> -->
+      </ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div id="header">
-    <img src="assets/img/mapa.png" />
+  <div id="map">
+    
   </div>
-
-    <form id="form">
+  
+  <form id="form">
       <h3 class="regular">Dirección</h3>
       <app-input placeholder="Ingresa dirección"></app-input>
       <h3 class="regular">Destino(Opcional)</h3>
