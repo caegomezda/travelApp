@@ -37,7 +37,7 @@ export class RegisterPage implements OnInit {
       this.firebaseService.signUp(this.credentialFormSignUp.value).then( user =>{
         loading.dismiss();
         this.firebaseService.SendVerificationMail();
-        // this.router.navigateByUrl('/verification', {replaceUrl: true});
+        this.router.navigateByUrl('/home', {replaceUrl: true});
 
       }, async err =>{
         loading.dismiss();
