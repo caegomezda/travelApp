@@ -40,3 +40,28 @@ ion-content{
         }
     }
 }
+
+.errors {
+    font-size: small;
+    color: #fff;
+    background: var(--ion-color-danger);
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.form {
+	margin-top: 30px;
+
+	ion-list {
+		padding-bottom: 8px;
+	}
+
+	h2 {
+		margin: 0;
+		color: var(--text-light);
+		font-size: .95rem;
+		margin-bottom: 30px;
+	}
+
+}

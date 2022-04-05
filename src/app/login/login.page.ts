@@ -36,12 +36,11 @@ export class LoginPage implements OnInit {
     let emailUsu =this.credentialForm.value['email'];
     const loading = await this.loadingController.create();
     await loading.present();
-
     this.firebaseService.signIn(newCredencialValue.value).then( res =>{
       if(this.firebaseService.isEmailVerified) {      
         this.usuarioInfo.getUsu(emailUsu)
         loading.dismiss();
-        this.router.navigateByUrl('/home', {replaceUrl: true});
+        this.router.navigateByUrl('/principal', {replaceUrl: true});
       } else {
         loading.dismiss();
         this.isNotVerified();
