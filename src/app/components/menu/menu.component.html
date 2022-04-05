@@ -1,0 +1,34 @@
+
+
+  <ion-menu-button  menu="main-menu"></ion-menu-button> 
+ 
+  <ion-menu color="primary" menuId="main-menu" contentId="main">
+    <ion-content>
+      <div class="menu-header-bg"></div>
+      <div class="header-content">
+        <img src="assets/img/icono-travel.png">
+        <ion-label>
+          <h2>Santiago Barrero</h2>
+          <p>Calle 61 #32a-24</p>
+        </ion-label>
+      </div>
+      
+      <ion-list class="menu-items"  lines="none">
+        <ion-item (click)="OpenCloseMenu()"  routerLink="/profile">
+          <ion-icon name="person-circle-outline"></ion-icon>Perfil
+        </ion-item>
+        <ion-item (click)="OpenCloseMenu()" routerLink="/intermunicipal">
+          <ion-icon  name="navigate-circle-outline"></ion-icon>Viajes intermunicipales
+        </ion-item>
+        <ion-item (click)="OpenCloseMenu()" routerLink="/contac">
+          <ion-icon name="help-outline"></ion-icon>Ayuda
+        </ion-item>
+        <ion-item (click)="OpenCloseMenu()" routerLink="/home">
+          <ion-icon name="exit-outline"></ion-icon>Salir
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+
+
