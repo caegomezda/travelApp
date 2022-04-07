@@ -49,15 +49,21 @@
       </div>
       
       <ion-item color="ion-color-secondary-rgb" class="ion-margin-bottom" lines="none">
-        <!-- <ion-input type="text" placeholder="{{'enter_mpin' | translate}}"></ion-input> -->
-        <ion-input 
-          [(ngModel)]="passwordForm.clave" 
-          [type]="passwordTypeInput_1"  
-          placeholder="{{'Contraseña'}}"
-          formControlName="password"
-          clearInput="true"
-          required>
-        </ion-input>
+          <div>
+            <ion-input 
+            [(ngModel)]="passwordForm.clave" 
+            [type]="passwordTypeInput_1"  
+            placeholder="{{'Contraseña'}}"
+            formControlName="password"
+            clearInput="true"
+            required>
+          </ion-input>
+        </div>
+        <button  item-end class="btn_eye_icon"  (click)="togglePasswordMode(1)">
+          <div>
+            <ion-icon  [name]="(passwordTypeInput_1 === 'text')?'eye':'eye-off'"></ion-icon>
+          </div>
+        </button>
       </ion-item>
 
       <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">

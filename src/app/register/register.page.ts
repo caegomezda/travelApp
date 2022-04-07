@@ -44,7 +44,7 @@ export class RegisterPage implements OnInit {
       this.firebaseService.signUp(this.credentialFormSignUp.value).then( user =>{
         loading.dismiss();
         this.firebaseService.SendVerificationMail();
-        this.router.navigateByUrl('/home', {replaceUrl: true});
+        this.router.navigateByUrl('/validate', {replaceUrl: true});
 
       }, async err =>{
         loading.dismiss();
@@ -87,7 +87,7 @@ export class RegisterPage implements OnInit {
         //   this.alertMeController('succes');
         // }else{
           
-          this.alertMeController('reject_Comparador')
+          this.alertMeController('reject_Comparador');
 
       }else{
         this.alertMeController('reject_diasDisp');
@@ -115,7 +115,7 @@ export class RegisterPage implements OnInit {
     }else if(estado === "reject_Comparador"){
       const alert = await this.alertController.create({
         header:'ERROR',
-        subHeader: 'No concuerdan las contraseãs',
+        subHeader: 'No concuerdan las contraseñas',
         message: 'Verifique y vuelva a digitar la nueva contraseña',
         buttons: ['Cerrar']
      });

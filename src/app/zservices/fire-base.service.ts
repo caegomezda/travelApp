@@ -43,7 +43,8 @@ export class FireBaseService {
       uid,
       email:email,
       phone:" ",
-      password:password
+      password:password,
+      type:"user"
     });
   }
 
