@@ -31,79 +31,73 @@
     <app-button (clic)="signUp()" texto="Registrar"></app-button>
   </form> -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   <div class="form">
 		<h2 class="ion-text-center">{{'Ingresa su correo, su contraseña y su documento de identidad'}}</h2>
 		<ion-list lines="none">
-				<form [formGroup]=credentialFormSignUp>
-
+			<form [formGroup]=credentialFormSignUp>
 				<ion-item lines="none">
-					<!-- <ion-input type="email" placeholder="{{'email_customer_id'}}"></ion-input> -->
 					<ion-input 
 						type="text"
 						placeholder="{{'Email o Correo'}}"
 						formControlName="email"
 						autofocus="true"
 						clearInput="true"
-						 
 						required>
 					</ion-input>
 				</ion-item>
-
 				<div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
 					<span *ngIf="email.errors?.required">Correo requerido</span>
 					<span *ngIf="email.errors?.email">Correo errado</span>
 				</div>
-
 				<ion-item lines="none">
-					<!-- <ion-input type="text" placeholder="{{'enter_mpin'}}"></ion-input> -->
-					<ion-input 
-						type="password" 
-						placeholder="{{'Contraseña'}}"
-						formControlName="password"
-						clearInput="true"
-						required>
-					</ion-input>
+					<div>
+						<ion-input 
+							[(ngModel)]="passwordForm.primeraClave" 
+							[type]="passwordTypeInput_1" 
+							placeholder="{{'Contraseña'}}"
+							formControlName="password"
+							clearInput="true"
+							required>
+						</ion-input>
+					</div>
+						<button  item-end class="btn_eye_icon"  (click)="togglePasswordMode(1)">
+							<div>
+								<ion-icon  [name]="(passwordTypeInput_1 === 'text')?'eye':'eye-off'"></ion-icon>
+							</div>
+						</button>
 				</ion-item>
 
 				<div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
 					<span *ngIf="password.errors?.required">Contraseña requerida</span>
 					<span *ngIf="password.errors?.minlength">La constraseña debe tener al menos 6 caracteres</span>
 				</div>
-
-        <ion-item lines="none">
-					<!-- <ion-input type="text" placeholder="{{'enter_mpin'}}"></ion-input> -->
-					<ion-input 
-						type="password" 
-						placeholder="{{'Contraseña'}}"
-						formControlName="password2"
-						clearInput="true"
-						required>
-					</ion-input>
+				<ion-item lines="none">
+					<div>
+						<ion-input 
+							[(ngModel)]="passwordForm.segundaClave" 
+							[type]="passwordTypeInput_1" 
+							placeholder="{{'Contraseña'}}"
+							formControlName="password2"
+							clearInput="true"
+							required>
+						</ion-input>
+					</div>
+					<button  item-end class="btn_eye_icon"  (click)="togglePasswordMode(2)">
+						<div>
+							<ion-icon  [name]="(passwordTypeInput_2 === 'text')?'eye':'eye-off'"></ion-icon>
+						</div>
+					</button>
 				</ion-item>
 
 				<div *ngIf="(password2.dirty || password2.touched) && password2.errors" class="errors">
 					<span *ngIf="password2.errors?.required">Contraseña requerida</span>
 					<span *ngIf="password2.errors?.minlength">La constraseña debe tener al menos 6 caracteres</span>
 				</div>
-
 			</form>
-			</ion-list>
-			<ion-item lines="none">
-				<ion-button size="large" shape="block" class="btn" (click)="signUp()">{{'Enviar'}}</ion-button>
-			</ion-item>
+		</ion-list>
+		<ion-item lines="none">
+			<ion-button size="large" shape="block" class="btn" (click)="signUp()">{{'Enviar'}}</ion-button>
+		</ion-item>
 	</div>
 
 

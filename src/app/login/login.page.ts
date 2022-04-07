@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
@@ -12,8 +12,14 @@ import { UtilitiesService } from '../zservices/utilities.service';
 })
 export class LoginPage implements OnInit {
 
+  passwordForm = {
+    clave : "",
+  }
+  @ViewChild('passwordEyeRegister', { read: ElementRef }) passwordEye: ElementRef;
+
   credentialForm:FormGroup;
   verificaionFirebase:any;
+  passwordTypeInput_1  =  'password';
 
   constructor(private fb:FormBuilder,
               private alertController: AlertController,
@@ -73,5 +79,12 @@ export class LoginPage implements OnInit {
         buttons: ['OK'],
       });
       await alert2.present();
+  }
+
+  togglePasswordMode(nPasswaord) {
+    if (nPasswaord === 1) {
+      this.passwordTypeInput_1 = this.passwordTypeInput_1 === 'text' ? 'password' : 'text';
     }
+  }
+
 }

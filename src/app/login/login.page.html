@@ -26,15 +26,6 @@
     <app-button  (click)="signIn()" texto="Iniciar sesión"></app-button>
  </form> -->
 
- 
-
-
-
-
-
-
-
-
  <div class="form">
   
   <ion-list lines="none">
@@ -60,7 +51,8 @@
       <ion-item color="ion-color-secondary-rgb" class="ion-margin-bottom" lines="none">
         <!-- <ion-input type="text" placeholder="{{'enter_mpin' | translate}}"></ion-input> -->
         <ion-input 
-          type="password" 
+          [(ngModel)]="passwordForm.clave" 
+          [type]="passwordTypeInput_1"  
           placeholder="{{'Contraseña'}}"
           formControlName="password"
           clearInput="true"
