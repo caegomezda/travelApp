@@ -42,6 +42,8 @@ export class FireBaseService {
     ).set({
       uid,
       email:email,
+      phone:" ",
+      password:password
     });
   }
 
