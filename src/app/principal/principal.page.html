@@ -9,7 +9,23 @@
 </ion-header>
 
 <ion-content>
-  <div id="map">
+  
+  <div #map class="map">
+      
+  </div> 
+  <!-- <ion-searchbar [(ngModel)]="search" (ionChange)="searchChanged()" placeholder="ubicacion"></ion-searchbar> -->
+  <ion-chip class="miubicacion" (click)="myLocation()">
+      <ion-label class="normal">Mi ubicación actual</ion-label>
+      <ion-icon name="locate"></ion-icon>
+  </ion-chip>
+  <ion-chip class="aceptar" (click)="aceptar()">
+    <ion-label class="normal">Aceptar</ion-label>
+    <ion-icon name="checkmark" ></ion-icon>
+  </ion-chip>
+  
+  
+  
+  <!-- <div id="map">
     
   </div>
   
@@ -19,7 +35,7 @@
       <h3 class="regular">Destino(Opcional)</h3>
       <app-input placeholder="Ingresa la dirección de destino"></app-input>
       <app-button texto="Solicitar taxi"></app-button>
-    </form>
+    </form> -->
 </ion-content>
   
 
