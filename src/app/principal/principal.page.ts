@@ -48,6 +48,7 @@ constructor(private renderer:Renderer2,
 
 ngOnInit(): void {
   this.init();
+  this.myLocation();
   // this.initMap();
 }
 async init() {
@@ -129,7 +130,10 @@ async myLocation() {
   });
 }
 
-
+aceptar() {
+  console. log('click aceptar ->',this. positionSet);
+}
+                                    
 
 
   // integracion temporal del mapa- se cambio a geolocation
