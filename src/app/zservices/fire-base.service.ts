@@ -5,16 +5,26 @@ import { User } from '../aInterfaces/fire-base-interface';
 
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireBaseService {
+  private userURL = environment.urlConfing.USERURL;
+  private driverURL = environment.urlConfing.DRIVERTURL;
+  private movementURL = environment.urlConfing.MOVEMENTURL;
+  private  httpOptions:any= { headers: new HttpHeaders({ 'Content-Type':  'application/json'}) };
 
   currentUser: User = null;
 
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
+              private http:HttpClient
   ) { 
     this.afAuth.onAuthStateChanged((user:any )=> {
       this.currentUser = user;
@@ -53,5 +63,33 @@ export class FireBaseService {
       console.log('registro exitoso');
     })
   }
+
+  async AddNewUser(credential,form){
+    let uid = credential.user.uid;
+    let accessToken = credential.user._delegate.accessToken
+    const apiUrl = `${this.userURL}${uid}.json?auth=${accessToken}`;
+    let json = form
+    json = JSON.stringify(json);
+    return this.http.post(`${apiUrl}`, json, this.httpOptions).pipe(map( data => data)).toPromise();
+  }
+
+  async AddNewDriver(credential,form){
+    let uid = credential.user.uid;
+    let accessToken = credential.user._delegate.accessToken
+    const apiUrl = `${this.driverURL}${uid}.json?auth=${accessToken}`;
+    let json = form
+    json = JSON.stringify(json);
+    return this.http.post(`${apiUrl}`, json, this.httpOptions).pipe(map( data => data)).toPromise();
+  }
+
+  async AddNewMovement(credential,form){
+    let uid = credential.user.uid;
+    let accessToken = credential.user._delegate.accessToken
+    const apiUrl = `${this.movementURL}${uid}.json?auth=${accessToken}`;
+    let json = form
+    json = JSON.stringify(json);
+    return this.http.post(`${apiUrl}`, json, this.httpOptions).pipe(map( data => data)).toPromise();
+  }
+  
 }
 

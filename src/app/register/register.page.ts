@@ -53,8 +53,6 @@ export class RegisterPage implements OnInit {
           message: err.message,
           buttons: ['OK'],
         });
-        console.log("alert",alert);
-        console.log("err",err)
         await alert.present();
       })
   }
@@ -77,18 +75,7 @@ export class RegisterPage implements OnInit {
 
     }else{
       if (this.passwordForm['primeraClave']!==this.passwordForm['segundoClave']) {
-        // if (this.passwordForm['claveNueva']===this.passwordForm['reClaveNueva']) {
-        //   let newForm = {
-        //     Tipo:"1",
-        //     Pusuario:this.infoUsuario.Pusuario,
-        //     ContraseniaActual:this.passwordForm['claveNueva']
-        //   }
-        //   await this.contrasena.listaCitas(newForm);
-        //   this.alertMeController('succes');
-        // }else{
-          
           this.alertMeController('reject_Comparador');
-
       }else{
         this.alertMeController('reject_diasDisp');
       }
