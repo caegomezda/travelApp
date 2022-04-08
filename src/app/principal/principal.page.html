@@ -16,38 +16,28 @@
 
   <div class="container">
 
-  <!-- <ion-searchbar [(ngModel)]="search" (ionChange)="searchChanged()" placeholder="ubicacion"></ion-searchbar> -->
-
-  <!-- <ion-chip class="miubicacion" (click)="myLocation()" >
-      <ion-label class="normal">Mi ubicación actual</ion-label>
-      <ion-icon name="locate"></ion-icon>
-  </ion-chip> -->
+  
   <ion-button id="miubicacion" class="regular" expand="block" shape="round" fill="outline" (click)="myLocation()" >Mi ubicación actual
     <ion-icon class="icono" name="locate"></ion-icon>
   </ion-button>
 
-
-  <!-- <ion-chip class="aceptar" (click)="aceptar()">
-    <ion-label class="normal">Aceptar</ion-label>
-    <ion-icon name="checkmark" ></ion-icon>
-  </ion-chip> -->
   <app-button  (click)="aceptar()" texto="Realizar pedido" class="aceptar"></app-button>
   
 </div>
   
-  <!-- <div id="map">
-    
-  </div>
-  
-  <form id="form">
-      <h3 class="regular">Dirección</h3>
-      <app-input placeholder="Ingresa dirección"></app-input>
-      <h3 class="regular">Destino(Opcional)</h3>
-      <app-input placeholder="Ingresa la dirección de destino"></app-input>
-      <app-button texto="Solicitar taxi"></app-button>
-    </form> -->
 </ion-content>
+
+<!-- <div id="map">
   
+</div>
+
+<form id="form">
+    <h3 class="regular">Dirección</h3>
+    <app-input placeholder="Ingresa dirección"></app-input>
+    <h3 class="regular">Destino(Opcional)</h3>
+    <app-input placeholder="Ingresa la dirección de destino"></app-input>
+    <app-button texto="Solicitar taxi"></app-button>
+  </form> -->
 
   <!-- <ion-item  class="ion-margin-bottom" lines="none">
     <ion-label position="floating">Dirección</ion-label>

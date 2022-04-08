@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>driverMap</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <div #map class="map">
+      
+  </div> 
+
+  <div class="container">
+
+  
+  <ion-button id="miubicacion" class="regular" expand="block" shape="round" fill="outline" (click)="myLocation()" >Mi ubicación actual
+    <ion-icon class="icono" name="locate"></ion-icon>
+  </ion-button>
+
+  <app-button  (click)="aceptar()" texto="Realizar pedido" class="aceptar"></app-button>
+  
+</div>
+  
+</ion-content>
