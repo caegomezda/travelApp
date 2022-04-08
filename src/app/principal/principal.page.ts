@@ -26,7 +26,7 @@ export class PrincipalPage implements OnInit {
     lng: -78.99958149999999
   };
   label = {
-    titulo: 'Ubicación',
+    titulo: 'Mi ubicación',
     subtitulo: 'Mi ubicación '
   }
   map: any;
