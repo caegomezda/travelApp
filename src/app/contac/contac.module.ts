@@ -7,12 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ContacPageRoutingModule } from './contac-routing.module';
 
 import { ContacPage } from './contac.page';
+import { InputModule } from '../components/input/input.module';
+import { ButtonModule } from '../components/button/button.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    InputModule,
+    ButtonModule,
     ContacPageRoutingModule
   ],
   declarations: [ContacPage]
