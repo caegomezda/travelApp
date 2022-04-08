@@ -4,7 +4,7 @@ import { Component, OnInit, Input, Renderer2, ElementRef, Inject, ViewChild } fr
 
 import { GoogleMapsService } from './google-maps.service';
 import { Plugins } from '@capacitor/core';
-import { ModalController } from '@ionic/angular';
+// import { ModalController } from '@ionic/angular';
 
 const {Geolocation} = Plugins;
 declare var google: any;
@@ -29,17 +29,22 @@ export class GoogleMapsComponent implements OnInit {
     marker: any;
     infowindow: any;
     positionSet: any
+    // public search:string='';
     @ViewChild('map') divMap: ElementRef;
 
 
   constructor(private renderer:Renderer2,
               @Inject(DOCUMENT) private document,
               private googlemapsService: GoogleMapsService,
-              public modalController: ModalController) { }
+              // public modalController: ModalController
+              ) {
+                // console.log(google);
+               }
 
 
   ngOnInit(): void {
     this.init();
+    // this.initMap();
   }
   async init() {
     this.googlemapsService.init(this.renderer, this.document). then( () =>{
@@ -59,6 +64,7 @@ export class GoogleMapsComponent implements OnInit {
         clickableIcons: false,
   };
 
+  
   this.map = new google.maps.Map(this.divMap.nativeElement,mapOptions);
 
   this.marker = new google.maps.Marker({
@@ -119,4 +125,8 @@ clickHandleEvent() {
     });
   }
 
+
+  // searchChanged(){
+  //   console.log(this.search)
+  // }
 }

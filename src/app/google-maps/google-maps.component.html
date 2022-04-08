@@ -1,7 +1,10 @@
 
 <ion-content>
 
-  <div #map class="map"></div> 
+  <div #map class="map">
+    
+  </div> 
+  <!-- <ion-searchbar [(ngModel)]="search" (ionChange)="searchChanged()" placeholder="ubicacion"></ion-searchbar> -->
   <ion-chip class="miubicacion" (click)="myLocation()">
       <ion-label class="normal">Mi ubicación actual</ion-label>
       <ion-icon name="locate"></ion-icon>
