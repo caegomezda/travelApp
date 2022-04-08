@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
       loading.dismiss();
       const alert = await this.alertController.create({
         header: ':(',
-        message: err.message,
+        message:'Correo o contraseña invalida, revisa e intentalo de nuevo',
         buttons: ['OK'],
       });
       console.log("alert",alert)
@@ -76,7 +76,10 @@ export class LoginPage implements OnInit {
       const alert2 = await this.alertController.create({
         header: ':(',
         message:'Correo no verificado, revisa tu correo',
-        buttons: ['OK'],
+        buttons: [{text:'OK',
+        handler: () => {
+          this.router.navigateByUrl('/login', {replaceUrl: true});
+        }}],
       });
       await alert2.present();
   }

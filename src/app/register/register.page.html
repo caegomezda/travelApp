@@ -35,7 +35,7 @@
 		<h2 class="ion-text-center">{{'Ingresa su correo, su contraseña y su documento de identidad'}}</h2>
 		<ion-list lines="none">
 			<form [formGroup]=credentialFormSignUp>
-				<ion-item lines="none">
+				<ion-item lines="none" class="ion-margin-bottom" color="ion-color-secondary-rgb">
 					<ion-input 
 						type="text"
 						placeholder="{{'Email o Correo'}}"
@@ -49,7 +49,7 @@
 					<span *ngIf="email.errors?.required">Correo requerido</span>
 					<span *ngIf="email.errors?.email">Correo errado</span>
 				</div>
-				<ion-item lines="none">
+				<ion-item lines="none" class="ion-margin-bottom" color="ion-color-secondary-rgb">
 					<div>
 						<ion-input 
 							[(ngModel)]="passwordForm.primeraClave" 
@@ -71,7 +71,7 @@
 					<span *ngIf="password.errors?.required">Contraseña requerida</span>
 					<span *ngIf="password.errors?.minlength">La constraseña debe tener al menos 6 caracteres</span>
 				</div>
-				<ion-item lines="none">
+				<ion-item lines="none" class="ion-margin-bottom" color="ion-color-secondary-rgb">
 					<div>
 						<ion-input 
 							[(ngModel)]="passwordForm.segundaClave" 
@@ -93,13 +93,13 @@
 					<span *ngIf="password2.errors?.required">Contraseña requerida</span>
 					<span *ngIf="password2.errors?.minlength">La constraseña debe tener al menos 6 caracteres</span>
 				</div>
+				<app-button  (click)="signUp()" texto="Registrar"></app-button>
 			</form>
 		</ion-list>
-		<ion-item lines="none">
-			<ion-button size="large" shape="block" class="btn" (click)="signUp()">{{'Enviar'}}</ion-button>
-		</ion-item>
+		
+		
 	</div>
-
+	
 
 
 
