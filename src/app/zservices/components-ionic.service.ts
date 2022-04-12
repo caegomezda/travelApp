@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 @Injectable({
@@ -6,7 +7,9 @@ import { AlertController } from '@ionic/angular';
 })
 export class ComponentsIonicService {
 
-  constructor(public alertController: AlertController) { }
+  constructor(public alertController: AlertController,
+              private router: Router,
+    ) { }
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
@@ -29,7 +32,7 @@ export class ComponentsIonicService {
           text: 'Aceptar',
           id: 'confirm-button',
           handler: () => {
-            console.log('Confirm Okay');
+            this.router.navigateByUrl('/driver-map', {replaceUrl: true});
           }
         }
       ]

@@ -1,25 +1,18 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 
-
-// import { Plugins } from '@capacitor/core';
-
 import { Geolocation } from '@capacitor/geolocation';
 import { GoogleMapsService } from '../zservices/google-maps.service';
 
-// const {Geolocation} = Plugins;
-declare var google: any;
 
 declare var google;
-@Component({
-  selector: 'app-principal',
-  templateUrl: './principal.page.html',
-  styleUrls: ['./principal.page.scss'],
-})
-export class PrincipalPage implements OnInit {
-  // map = null; parte del codigo de integracion temporal
-  
 
+@Component({
+  selector: 'app-driver-map',
+  templateUrl: './driver-map.page.html',
+  styleUrls: ['./driver-map.page.scss'],
+})
+export class DriverMapPage implements OnInit {
 
   @Input () position = {
     lat: -2.898116,
@@ -133,29 +126,5 @@ async myLocation() {
 aceptar() {
   console. log('click aceptar ->',this. positionSet);
 }
-                                    
-
-
-  // integracion temporal del mapa- se cambio a geolocation
-  // loadMap() {
-  //   // create a new map by passing HTMLElement
-  //   const mapEle: HTMLElement = document.getElementById('map');
-  //   // create LatLng object
-  //   const myLatLng = {lat: 5.058859029717547, lng: -75.48927077310586};
-  //   // create map
-  //   this.map = new google.maps.Map(mapEle, {
-  //     center: myLatLng,
-  //     zoom: 17
-  //   });
-  
-  //   google.maps.event.addListenerOnce(this.map, 'idle', () => {
-  //     // this.renderMarkers();
-  //     mapEle.classList.add('show-map');
-  //   });
-  // }
-
-  // ngOnInit() {
-  //   // this.loadMap(); parte del codigo temporal 
-  // }
 
 }

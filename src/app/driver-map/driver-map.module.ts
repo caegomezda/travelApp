@@ -4,10 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ContacPageRoutingModule } from './contac-routing.module';
+import { DriverMapPageRoutingModule } from './driver-map-routing.module';
 
-import { ContacPage } from './contac.page';
-import { InputModule } from '../components/input/input.module';
+import { DriverMapPage } from './driver-map.page';
 import { ButtonModule } from '../components/button/button.module';
 
 @NgModule({
@@ -15,10 +14,9 @@ import { ButtonModule } from '../components/button/button.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    InputModule,
     ButtonModule,
-    ContacPageRoutingModule
+    DriverMapPageRoutingModule
   ],
-  declarations: [ContacPage]
+  declarations: [DriverMapPage]
 })
-export class ContacPageModule {}
+export class DriverMapPageModule {}
