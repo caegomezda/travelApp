@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>driverMap</ion-title>
+    <ion-buttons color="primary" slot="start">
+      <ion-menu-button menu="driver">
+        <!-- <app-menu></app-menu> -->
+      </ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -16,8 +20,12 @@
   <ion-button id="miubicacion" class="regular" expand="block" shape="round" fill="outline" (click)="myLocation()" >Mi ubicación actual
     <ion-icon class="icono" name="locate"></ion-icon>
   </ion-button>
-
-  <app-button  (click)="aceptar()" texto="Realizar pedido" class="aceptar"></app-button>
+  <!-- <app-input  *ngIf="isAcept" class="app-input-class" placeholder="Ingrese el codigo"></app-input> -->
+  <div *ngIf="isAcept && !isAceptCod" class="app-input-class">
+    <ion-input placeholder="Ingrese el código"></ion-input>
+  </div>
+  <app-button *ngIf="!isAcept" (click)="aceptar()" texto="Aceptar pedido" class="aceptar"></app-button>
+  <app-button *ngIf="isAcept && !isAceptCod" (click)="aceptar2()" texto="Enviar codigo" class="aceptar"></app-button>
   
 </div>
   

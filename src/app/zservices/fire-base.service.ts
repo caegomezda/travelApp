@@ -2,15 +2,12 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from '../aInterfaces/fire-base-interface';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-<<<<<<< HEAD
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 
 
-=======
->>>>>>> bb03f4ea53e63bb7716cbeee3249814e54351292
 
 @Injectable({
   providedIn: 'root'

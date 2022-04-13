@@ -3,7 +3,7 @@ import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewChild } fr
 
 import { Geolocation } from '@capacitor/geolocation';
 import { GoogleMapsService } from '../zservices/google-maps.service';
-
+import { AlertController } from '@ionic/angular';
 
 declare var google;
 
@@ -25,7 +25,9 @@ export class DriverMapPage implements OnInit {
   map: any;
   marker: any;
   infowindow: any;
-  positionSet: any
+  positionSet: any;
+  isAcept:Boolean;
+  isAceptCod:Boolean;
   // public search:string='';
   @ViewChild('map') divMap: ElementRef;
 
@@ -33,6 +35,7 @@ export class DriverMapPage implements OnInit {
 constructor(private renderer:Renderer2,
             @Inject(DOCUMENT) private document,
             private googlemapsService: GoogleMapsService,
+            private alertController : AlertController,
             // public modalController: ModalController
             ) {
               // console.log(google);
@@ -44,6 +47,12 @@ ngOnInit(): void {
   this.myLocation();
   // this.initMap();
 }
+
+ionViewWillEnter(){
+  this.isAcept = false;
+  this.isAceptCod = false;
+}
+
 async init() {
   this.googlemapsService.init(this.renderer, this.document). then( () =>{
           this.initMap();
@@ -124,7 +133,66 @@ async myLocation() {
 }
 
 aceptar() {
-  console. log('click aceptar ->',this. positionSet);
+ 
+  // console. log('click aceptar ->',this. positionSet);
+  // console.log('this.isAcept',this.isAcept);
+  this.presentAlertConfirm();
+}
+
+aceptar2() {
+ 
+  // console. log('click aceptar ->',this. positionSet);
+  // console.log('this.isAcept',this.isAcept);
+  this.presentAlertConfirm2();
+}
+
+async presentAlertConfirm() {
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    mode:'ios',
+    message: 'Ingrese el codigo de confirmacion',
+    buttons: [
+      {
+        text: 'Rechazar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        id: 'cancel-button',
+      }, {
+        text: 'Aceptar',
+        id: 'confirm-button',
+        handler: () => {
+          this.isAcept = true;
+          console.log('this.isAcept',this.isAcept);
+          console.log('this.isAceptCod',this.isAceptCod);
+        }
+      }
+    ]
+  });
+  await alert.present();
+}
+
+async presentAlertConfirm2() {
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    mode:'ios',
+    message: 'Se ha aceptado el servicio',
+    buttons: [
+      {
+        text: 'Rechazar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        id: 'cancel-button',
+      }, {
+        text: 'Aceptar',
+        id: 'confirm-button',
+        handler: () => {
+          this.isAceptCod = true;
+          console.log('this.isAceptCod',this.isAceptCod);
+        }
+      }
+    ]
+  });
+  await alert.present();
 }
 
 }

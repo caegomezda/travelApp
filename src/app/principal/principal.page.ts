@@ -6,6 +6,7 @@ import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewChild } fr
 
 import { Geolocation } from '@capacitor/geolocation';
 import { GoogleMapsService } from '../zservices/google-maps.service';
+import { AlertController } from '@ionic/angular';
 
 // const {Geolocation} = Plugins;
 declare var google: any;
@@ -43,6 +44,7 @@ export class PrincipalPage implements OnInit {
 constructor(private renderer:Renderer2,
             @Inject(DOCUMENT) private document,
             private googlemapsService: GoogleMapsService,
+            private alertController : AlertController
             // public modalController: ModalController
             ) {
               // console.log(google);
@@ -139,9 +141,28 @@ async myLocation() {
 
 aceptar() {
   console. log('click aceptar ->',this.positionSet);
-
+  this.presentAlertConfirm()
 }
 
+async presentAlertConfirm() {
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    mode:'ios',
+    message: 'Realizando el pedido ...',
+    buttons: [
+      {
+        text: 'Rechazar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        id: 'cancel-button',
+      }, {
+        text: 'Aceptar',
+      }
+    ]
+  });
+
+  await alert.present();
+}
 
 
   // integracion temporal del mapa- se cambio a geolocation

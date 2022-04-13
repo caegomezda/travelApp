@@ -23,12 +23,22 @@
     position: fixed;
     bottom: 5%;
     width: 70%;
-    
-    
     }
     .search {
     position: fixed;
     top: 45px;
     left: 0px;
+    }
+}
+
+.app-input-class{
+    position: fixed;
+    bottom: 15%;
+    width: 70%;
+    background-color: rgba(253, 81, 45,0.75);
+    border-radius: 25px;
+    ion-input{
+        align-content: center;
+        margin-left: 70px;
     }
 }
