@@ -11,6 +11,8 @@ import { GoogleMapsService } from '../zservices/google-maps.service';
 declare var google: any;
 
 declare var google;
+
+
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
@@ -19,12 +21,13 @@ declare var google;
 export class PrincipalPage implements OnInit {
   // map = null; parte del codigo de integracion temporal
   
-
+  
 
   @Input () position = {
-    lat: -2.898116,
-    lng: -78.99958149999999
+    lat: 5.0507972,
+    lng: -75.4927164
   };
+
   label = {
     titulo: 'Mi ubicación',
     subtitulo: 'Mi ubicación '
@@ -103,7 +106,10 @@ addMarker(position: any): void {
   this.marker.setPosition(latLng);
   this.map.panTo(position);
   this.positionSet = position;
+ 
 }
+
+
 
 setInfoWindow(marker: any, titulo: string, subtitulo: string) {
   const contentString = '<div id="contentInsideMap">'+
@@ -127,13 +133,15 @@ async myLocation() {
                lng: res.coords.longitude,
         }
          this.addMarker(position);
+         
   });
 }
 
 aceptar() {
-  console. log('click aceptar ->',this. positionSet);
+  console. log('click aceptar ->',this.positionSet);
+
 }
-                                    
+
 
 
   // integracion temporal del mapa- se cambio a geolocation
