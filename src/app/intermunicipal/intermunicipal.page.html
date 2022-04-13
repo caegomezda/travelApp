@@ -1,17 +1,54 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons color="primary" slot="start">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
+      <ion-menu-button menu="main-menu">
+        <!-- <app-menu></app-menu> -->
+      </ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div id="header">
-    <img src="assets/mapa.png" />
-  </div>
+  
+  <div #map class="map">
+      
+  </div> 
 
-  <form id="form">
-    <app-button texto="Buscar transporte"></app-button>
-  </form>
+  <div class="container">
+
+  
+  <ion-button id="miubicacion" class="regular" expand="block" shape="round" fill="outline" (click)="myLocation()" >Mi ubicación actual
+    <ion-icon class="icono" name="locate"></ion-icon>
+  </ion-button>
+
+  <app-button  (click)="aceptar()" texto="Realizar pedido" class="aceptar"></app-button>
+  <!-- <app-button  (click)="renderMarkers()" texto="ver taxis en la zona" class="taxis"></app-button> -->
+  
+  <ion-icon class="car" name="bus-sharp"></ion-icon>
+  <ion-icon class="car1" name="bus-sharp"></ion-icon>
+  <ion-icon class="car2" name="bus-sharp"></ion-icon>
+  <ion-icon class="car3" name="bus-sharp"></ion-icon>
+</div>
+  
 </ion-content>
+
+<!-- <div id="map">
+  
+</div>
+
+<form id="form">
+    <h3 class="regular">Dirección</h3>
+    <app-input placeholder="Ingresa dirección"></app-input>
+    <h3 class="regular">Destino(Opcional)</h3>
+    <app-input placeholder="Ingresa la dirección de destino"></app-input>
+    <app-button texto="Solicitar taxi"></app-button>
+  </form> -->
+
+  <!-- <ion-item  class="ion-margin-bottom" lines="none">
+    <ion-label position="floating">Dirección</ion-label>
+    <ion-input color="ion-color-secondary-rgb"></ion-input>
+  </ion-item>
+  <ion-item color="ion-color-secondary-rgb" class="ion-margin-bottom" lines="none">
+    <ion-label position="floating">Ingresa el destino(Opcional)</ion-label>
+    <ion-input></ion-input>
+  </ion-item> -->
