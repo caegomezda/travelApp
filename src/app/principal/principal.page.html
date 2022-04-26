@@ -9,19 +9,35 @@
 </ion-header>
 
 <ion-content>
-  <div id="map">
+  
+  <div #map class="map">
+      
+  </div> 
+
+  <div class="container">
+
+    
+    <ion-button id="miubicacion" class="regular" expand="block" shape="round" fill="outline" (click)="myLocation()" >Mi ubicación actual
+      <ion-icon class="icono" name="locate"></ion-icon>
+    </ion-button>
+
+    <app-button  (click)="aceptar()" texto="Realizar pedido" class="aceptar"></app-button>
     
   </div>
   
-  <form id="form">
-      <h3 class="regular">Dirección</h3>
-      <app-input placeholder="Ingresa dirección"></app-input>
-      <h3 class="regular">Destino(Opcional)</h3>
-      <app-input placeholder="Ingresa la dirección de destino"></app-input>
-      <app-button texto="Solicitar taxi"></app-button>
-    </form>
 </ion-content>
+
+<!-- <div id="map">
   
+</div>
+
+<form id="form">
+    <h3 class="regular">Dirección</h3>
+    <app-input placeholder="Ingresa dirección"></app-input>
+    <h3 class="regular">Destino(Opcional)</h3>
+    <app-input placeholder="Ingresa la dirección de destino"></app-input>
+    <app-button texto="Solicitar taxi"></app-button>
+  </form> -->
 
   <!-- <ion-item  class="ion-margin-bottom" lines="none">
     <ion-label position="floating">Dirección</ion-label>

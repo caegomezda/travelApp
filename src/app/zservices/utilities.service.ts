@@ -17,4 +17,7 @@ export class UtilitiesService {
     let result = this.correoUsuario;
     return result;
   }
+
+    //Crea aleatoriamente cuentas para nuevos usuarios
+
 }

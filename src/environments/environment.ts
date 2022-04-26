@@ -1,7 +1,7 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
+let URL = "https://travel-app-v1-e684f-default-rtdb.firebaseio.com/";
 export const environment = {
   production: true,
   firebaseConfig: {
@@ -12,6 +12,12 @@ export const environment = {
     storageBucket: "travel-app-v1-e684f.appspot.com",
     messagingSenderId: "560108629560",
     measurementId: "G-5FH4XQX77Z"
+  },
+
+  urlConfing:{
+    USERURL: `${URL}user-api`,
+    DRIVERTURL: `${URL}driver-api`,
+    MOVEMENTURL: `${URL}movement-api`,
   }
 };
 

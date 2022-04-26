@@ -10,7 +10,7 @@
 
 <ion-content>
   <div id="header">
-    <img src="assets/logotipo-travel.png" />
+    <img src="assets/img/logotipo-travel.png" />
   </div>
 
   <div id="contac">
@@ -32,9 +32,14 @@
     <h3 class="regular">
       Si necesitas solicitar ayuda contactanos al siguiente correo de soporte:<br>
     </h3>
-    <h2 class="regular">
+    <!-- <h2 class="regular">
       soporteTravelApp@gmail.com
-    </h2>
+    </h2> -->
+    <app-input placeholder="Titulo"></app-input>
+    <!-- <app-input  placeholder="Descripcción"></app-input> -->
+    <ion-textarea color="ion-color-secondary-rgb" class="ion-margin-bottom" class="ion-text-area" rows="6" cols="20" placeholder="  Descripcción..."></ion-textarea>
+    
+    <app-button texto="Enviar correo"></app-button>
   </form>
 </ion-content>
 

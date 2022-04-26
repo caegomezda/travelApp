@@ -1,28 +1,23 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 
-
-// import { Plugins } from '@capacitor/core';
-
 import { Geolocation } from '@capacitor/geolocation';
 import { GoogleMapsService } from '../zservices/google-maps.service';
-
-// const {Geolocation} = Plugins;
-declare var google: any;
+import { AlertController } from '@ionic/angular';
 
 declare var google;
+
 @Component({
-  selector: 'app-intermunicipal',
-  templateUrl: './intermunicipal.page.html',
-  styleUrls: ['./intermunicipal.page.scss'],
+  selector: 'app-driver-map',
+  templateUrl: './driver-map.page.html',
+  styleUrls: ['./driver-map.page.scss'],
 })
-export class IntermunicipalPage implements OnInit {
+export class DriverMapPage implements OnInit {
 
   @Input () position = {
     lat: 5.0507972,
     lng: -75.4927164
   };
-
   label = {
     titulo: 'Mi ubicación',
     subtitulo: 'Mi ubicación '
@@ -30,7 +25,9 @@ export class IntermunicipalPage implements OnInit {
   map: any;
   marker: any;
   infowindow: any;
-  positionSet: any
+  positionSet: any;
+  isAcept:Boolean;
+  isAceptCod:Boolean;
   // public search:string='';
   @ViewChild('map') divMap: ElementRef;
 
@@ -38,6 +35,7 @@ export class IntermunicipalPage implements OnInit {
 constructor(private renderer:Renderer2,
             @Inject(DOCUMENT) private document,
             private googlemapsService: GoogleMapsService,
+            private alertController : AlertController,
             // public modalController: ModalController
             ) {
               // console.log(google);
@@ -47,8 +45,14 @@ constructor(private renderer:Renderer2,
 ngOnInit(): void {
   this.init();
   this.myLocation();
-  // this.initMap();
+  Geolocation.requestPermissions();
 }
+
+ionViewWillEnter(){
+  this.isAcept = false;
+  this.isAceptCod = false;
+}
+
 async init() {
   this.googlemapsService.init(this.renderer, this.document). then( () =>{
           this.initMap();
@@ -101,10 +105,7 @@ addMarker(position: any): void {
   this.marker.setPosition(latLng);
   this.map.panTo(position);
   this.positionSet = position;
- 
 }
-
-
 
 setInfoWindow(marker: any, titulo: string, subtitulo: string) {
   const contentString = '<div id="contentInsideMap">'+
@@ -128,37 +129,70 @@ async myLocation() {
                lng: res.coords.longitude,
         }
          this.addMarker(position);
-         
   });
 }
 
 aceptar() {
-  console. log('click aceptar ->',this.positionSet);
-
+ 
+  // console. log('click aceptar ->',this. positionSet);
+  // console.log('this.isAcept',this.isAcept);
+  this.presentAlertConfirm();
 }
 
+aceptar2() {
+ 
+  // console. log('click aceptar ->',this. positionSet);
+  // console.log('this.isAcept',this.isAcept);
+  this.presentAlertConfirm2();
+}
 
+async presentAlertConfirm() {
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    mode:'ios',
+    message: 'Ingrese el codigo de confirmacion',
+    buttons: [
+      {
+        text: 'Rechazar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        id: 'cancel-button',
+      }, {
+        text: 'Aceptar',
+        id: 'confirm-button',
+        handler: () => {
+          this.isAcept = true;
+          console.log('this.isAcept',this.isAcept);
+          console.log('this.isAceptCod',this.isAceptCod);
+        }
+      }
+    ]
+  });
+  await alert.present();
+}
 
-  // integracion temporal del mapa- se cambio a geolocation
-  // loadMap() {
-  //   // create a new map by passing HTMLElement
-  //   const mapEle: HTMLElement = document.getElementById('map');
-  //   // create LatLng object
-  //   const myLatLng = {lat: 5.058859029717547, lng: -75.48927077310586};
-  //   // create map
-  //   this.map = new google.maps.Map(mapEle, {
-  //     center: myLatLng,
-  //     zoom: 17
-  //   });
-  
-  //   google.maps.event.addListenerOnce(this.map, 'idle', () => {
-  //     // this.renderMarkers();
-  //     mapEle.classList.add('show-map');
-  //   });
-  // }
-
-  // ngOnInit() {
-  //   // this.loadMap(); parte del codigo temporal 
-  // }
+async presentAlertConfirm2() {
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    mode:'ios',
+    message: 'Se ha aceptado el servicio',
+    buttons: [
+      {
+        text: 'Rechazar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        id: 'cancel-button',
+      }, {
+        text: 'Aceptar',
+        id: 'confirm-button',
+        handler: () => {
+          this.isAceptCod = true;
+          console.log('this.isAceptCod',this.isAceptCod);
+        }
+      }
+    ]
+  });
+  await alert.present();
+}
 
 }

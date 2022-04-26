@@ -46,6 +46,10 @@ const routes: Routes = [
     path: 'validate',
     loadChildren: () => import('./validate/validate.module').then( m => m.ValidatePageModule)
   },
+  {
+    path: 'driver-map',
+    loadChildren: () => import('./driver-map/driver-map.module').then( m => m.DriverMapPageModule)
+  },
 
   
 ];
