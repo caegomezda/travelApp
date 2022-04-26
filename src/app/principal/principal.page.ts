@@ -9,9 +9,17 @@ import { GoogleMapsService } from '../zservices/google-maps.service';
 import { AlertController } from '@ionic/angular';
 
 // const {Geolocation} = Plugins;
-declare var google: any;
+// declare var google: any;
 
 declare var google;
+
+// interface para los marcadores externos
+interface Marker {
+  position: {
+    lat: number,
+    lng: number,
+  };
+}
 
 
 @Component({
@@ -20,8 +28,22 @@ declare var google;
   styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements OnInit {
-  // map = null; parte del codigo de integracion temporal
   
+  // array de markers
+  markers: Marker[] = [
+    {
+      position: {
+        lat: 5.0514684683498391,
+        lng: -75.489938501083023,
+      }
+    },
+    {
+      position: {
+        lat: 5.0546330167657505,
+        lng: -75.49148403333304,
+      }
+    }
+  ];
   
 
   @Input () position = {
@@ -54,7 +76,12 @@ constructor(private renderer:Renderer2,
 ngOnInit(): void {
   this.init();
   this.myLocation();
+<<<<<<< HEAD
   Geolocation.requestPermissions();
+=======
+  
+  // this.initMap();
+>>>>>>> 5bdfd44a977f1c42a9f0612d1348490668679a0a
 }
 async init() {
   this.googlemapsService.init(this.renderer, this.document). then( () =>{
@@ -74,7 +101,7 @@ let mapOptions = {
       clickableIcons: false,
 };
 
-
+// Seleccionamos donde estara  nuestro mapa
 this.map = new google.maps.Map(this.divMap.nativeElement,mapOptions);
 
 this.marker = new google.maps.Marker({
@@ -90,6 +117,8 @@ this.infowindow = new google.maps.InfoWindow();
     this.setInfoWindow(this.marker, this.label.titulo, this.label.subtitulo)
     
 // }
+
+this.renderMarkers();
 
 }
 
@@ -109,6 +138,22 @@ addMarker(position: any): void {
   this.map.panTo(position);
   this.positionSet = position;
  
+}
+
+// funcion que renderisa todos los markers de el array 
+renderMarkers() {
+  this.markers.forEach(marker => {
+    this.addMarkers(marker);
+  });
+}
+
+// funcion addMarkers: pinta los markers del arreglo
+addMarkers(marker: Marker) {
+  return new google.maps.Marker({
+    position: marker.position,
+    icon: 'assets/icon/car-sport.svg',
+    map: this.map
+  });
 }
 
 
@@ -135,6 +180,7 @@ async myLocation() {
                lng: res.coords.longitude,
         }
          this.addMarker(position);
+         
          
   });
 }
@@ -164,27 +210,5 @@ async presentAlertConfirm() {
   await alert.present();
 }
 
-
-  // integracion temporal del mapa- se cambio a geolocation
-  // loadMap() {
-  //   // create a new map by passing HTMLElement
-  //   const mapEle: HTMLElement = document.getElementById('map');
-  //   // create LatLng object
-  //   const myLatLng = {lat: 5.058859029717547, lng: -75.48927077310586};
-  //   // create map
-  //   this.map = new google.maps.Map(mapEle, {
-  //     center: myLatLng,
-  //     zoom: 17
-  //   });
-  
-  //   google.maps.event.addListenerOnce(this.map, 'idle', () => {
-  //     // this.renderMarkers();
-  //     mapEle.classList.add('show-map');
-  //   });
-  // }
-
-  // ngOnInit() {
-  //   // this.loadMap(); parte del codigo temporal 
-  // }
 
 }
