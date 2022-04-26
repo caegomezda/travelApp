@@ -76,12 +76,9 @@ constructor(private renderer:Renderer2,
 ngOnInit(): void {
   this.init();
   this.myLocation();
-<<<<<<< HEAD
   Geolocation.requestPermissions();
-=======
   
   // this.initMap();
->>>>>>> 5bdfd44a977f1c42a9f0612d1348490668679a0a
 }
 async init() {
   this.googlemapsService.init(this.renderer, this.document). then( () =>{

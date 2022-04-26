@@ -1,8 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { isReactNative } from '@firebase/util';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { FireBaseService } from '../zservices/fire-base.service';
+import { UtilitiesService } from '../zservices/utilities.service';
 
 @Component({
   selector: 'app-register',
@@ -27,6 +30,7 @@ export class RegisterPage implements OnInit {
               private loadingController: LoadingController,
               private firebaseService: FireBaseService,
               private router: Router,
+              private afAuth: AngularFireAuth,
   ) { }
 
   ngOnInit(){
@@ -37,6 +41,8 @@ export class RegisterPage implements OnInit {
 
     });
   }
+
+
 
   async  signUp(){
       const loading = await this.loadingController.create();
