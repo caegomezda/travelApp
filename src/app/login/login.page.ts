@@ -16,7 +16,6 @@ export class LoginPage implements OnInit {
     clave : "",
   }
   @ViewChild('passwordEyeRegister', { read: ElementRef }) passwordEye: ElementRef;
-
   credentialForm:FormGroup;
   verificaionFirebase:any;
   passwordTypeInput_1  =  'password';
@@ -27,11 +26,11 @@ export class LoginPage implements OnInit {
               private firebaseService:FireBaseService,
               private usuarioInfo: UtilitiesService,
               private router: Router,
-  ) { }
+              private utilities : UtilitiesService
+                ) { }
 
   ngOnInit() {    
     //Credential login form EMAIL PASSWORD
-
       this.credentialForm = this.fb.group({
         email:['',[Validators.required, Validators.email]],
         password:['',[Validators.required,Validators.minLength(6)]],
@@ -39,36 +38,37 @@ export class LoginPage implements OnInit {
   }
 
   async  signIn(){
-    // console.log('this.credentialForm.value',this.credentialForm.value);
-
     if (this.credentialForm.value.email === "driver1@gmail.com") {
-      this.router.navigateByUrl('/driver', { replaceUrl: true });
+        this.router.navigateByUrl('/driver', { replaceUrl: true });
     }else{
-    let newCredencialValue = {value:{email:this.credentialForm.value['email'],password:this.credentialForm.value['password']}}
-    let emailUsu =this.credentialForm.value['email'];
-    const loading = await this.loadingController.create();
-    await loading.present();
-    this.firebaseService.signIn(newCredencialValue.value).then( res =>{
-      if(this.firebaseService.isEmailVerified) {      
-        this.usuarioInfo.getUsu(emailUsu)
+      let newCredencialValue = {value:{email:this.credentialForm.value['email'],password:this.credentialForm.value['password']}}
+      let emailUsu =this.credentialForm.value['email'];
+      const loading = await this.loadingController.create();
+      await loading.present();
+      this.firebaseService.signIn(newCredencialValue.value).then( async res =>{
+        if(this.firebaseService.isEmailVerified){      
+          this.usuarioInfo.getUsu(emailUsu)
+          loading.dismiss();
+          await this.utilities.saveIdUser(res.user.uid);
+          await this.utilities.saveTokenUser(res.user.getIdToken());
+          await this.firebaseService.getAccountData();
+          this.router.navigateByUrl('/principal', {replaceUrl: true});
+        }else{
+          loading.dismiss();
+          this.isNotVerified();
+        }
+      }, async err =>{
         loading.dismiss();
-        this.router.navigateByUrl('/principal', {replaceUrl: true});
-      } else {
-        loading.dismiss();
-        this.isNotVerified();
-      }
-    }, async err =>{
-      loading.dismiss();
-      const alert = await this.alertController.create({
-        header: ':(',
-        message:'Correo o contraseña invalida, revisa e intentalo de nuevo',
-        buttons: ['OK'],
-      });
-      console.log("alert",alert)
-      await alert.present();
-    })
-    await loading.dismiss();
-  }
+        const alert = await this.alertController.create({
+          header: ':(',
+          message:'Correo o contraseña invalida, revisa e intentalo de nuevo',
+          buttons: ['OK'],
+        });
+        console.log("err",err)
+        await alert.present();
+      })
+      await loading.dismiss();
+    }
   }
   
   get email(){
@@ -80,15 +80,15 @@ export class LoginPage implements OnInit {
   }
 
   async isNotVerified(){
-      const alert2 = await this.alertController.create({
-        header: ':(',
-        message:'Correo no verificado, revisa tu correo',
-        buttons: [{text:'OK',
-        handler: () => {
-          this.router.navigateByUrl('/login', {replaceUrl: true});
-        }}],
-      });
-      await alert2.present();
+    const alert2 = await this.alertController.create({
+      header: ':(',
+      message:'Correo no verificado, revisa tu correo',
+      buttons: [{text:'OK',
+      handler: () => {
+        this.router.navigateByUrl('/login', {replaceUrl: true});
+      }}],
+    });
+    await alert2.present();
   }
 
   togglePasswordMode(nPasswaord) {

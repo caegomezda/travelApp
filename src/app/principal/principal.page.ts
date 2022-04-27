@@ -7,6 +7,7 @@ import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewChild } fr
 import { Geolocation } from '@capacitor/geolocation';
 import { GoogleMapsService } from '../zservices/google-maps.service';
 import { AlertController } from '@ionic/angular';
+import { UtilitiesService } from '../zservices/utilities.service';
 
 // const {Geolocation} = Plugins;
 // declare var google: any;
@@ -58,7 +59,8 @@ export class PrincipalPage implements OnInit {
   map: any;
   marker: any;
   infowindow: any;
-  positionSet: any
+  positionSet: any;
+  userData: any;
   // public search:string='';
   @ViewChild('map') divMap: ElementRef;
 
@@ -66,20 +68,23 @@ export class PrincipalPage implements OnInit {
 constructor(private renderer:Renderer2,
             @Inject(DOCUMENT) private document,
             private googlemapsService: GoogleMapsService,
-            private alertController : AlertController
-            // public modalController: ModalController
-            ) {
-              // console.log(google);
-             }
+            private alertController : AlertController,
+            private utilities : UtilitiesService,
+            ){
+}
 
 
 ngOnInit(): void {
   this.init();
   this.myLocation();
   Geolocation.requestPermissions();
-  
-  // this.initMap();
 }
+
+ionViewWillEnter(){
+  this.userData = this.utilities.getDataUser();
+  console.log('this.userData',this.userData);
+}
+
 async init() {
   this.googlemapsService.init(this.renderer, this.document). then( () =>{
           this.initMap();
@@ -167,18 +172,12 @@ setInfoWindow(marker: any, titulo: string, subtitulo: string) {
 }
 
 async myLocation() {
-  console.log('mylocation() click')
   Geolocation.getCurrentPosition().then( (res) => {
-
-         console. log('my location() - > get')
-
-        const position = {
-               lat: res.coords.latitude,
-               lng: res.coords.longitude,
-        }
-         this.addMarker(position);
-         
-         
+    const position = {
+            lat: res.coords.latitude,
+            lng: res.coords.longitude,
+    }
+    this.addMarker(position);
   });
 }
 

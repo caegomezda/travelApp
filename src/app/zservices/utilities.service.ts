@@ -4,7 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UtilitiesService {
-
+  idUser:any;
+  token:any;
+  item:any;
   correoUsuario:any;
 
   constructor() { }
@@ -18,6 +20,28 @@ export class UtilitiesService {
     return result;
   }
 
-    //Crea aleatoriamente cuentas para nuevos usuarios
+  saveIdUser(id){
+    this.idUser = id;
+  }
+  //Obtiene la del usuario activo
+  getIdUser(){
+    return this.idUser;
+  }
+
+  saveTokenUser(token){
+    this.token = token;
+  }
+
+  getToken(){
+    return this.token;
+  }
+
+  getDataUser(){
+    return this.getDataUser;
+  }
+
+  saveDataUser(data){
+    this.getDataUser = data;
+  }
 
 }
