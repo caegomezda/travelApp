@@ -8,6 +8,7 @@ import { DriverMapPageRoutingModule } from './driver-map-routing.module';
 
 import { DriverMapPage } from './driver-map.page';
 import { ButtonModule } from '../components/button/button.module';
+import { InputModule } from '../components/input/input.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ButtonModule } from '../components/button/button.module';
     FormsModule,
     IonicModule,
     ButtonModule,
-    DriverMapPageRoutingModule
+    DriverMapPageRoutingModule,
+    InputModule,
   ],
   declarations: [DriverMapPage]
 })

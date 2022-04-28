@@ -14,7 +14,7 @@ ion-content{
             width: 340px;
             height: 118px;
             border: 0;
-            margin-top: 15%;
+            margin-top: 0%;
         }
     }
 
@@ -25,7 +25,7 @@ ion-content{
             font-weight: 700;
             font-size: 36px;
             color: #2f2e41;
-            margin-top: 15%;
+            // margin-top: 15%;
         }
         ion-icon{
             color:#FD512D;
@@ -45,7 +45,7 @@ ion-content{
         margin-left:6%;
         margin-right:6%;
         h3{
-            margin-top:10%;
+            // margin-top:10%;
             text-align:justify;
             font-weight:600;
         }
@@ -56,4 +56,17 @@ ion-content{
         }
         
     }
+}
+
+.ion-text-area{
+    font-size:18px;
+    --padding-top:14px;
+    --padding-bottom:14px;
+    --padding-start:5px;
+    border-radius: 18px;
+    margin-bottom: 15px;
+    // height:44px;
+    box-shadow: 1px 8px 8px 0px rgba(0,0,0,0.08);
+    --highlight-height: 0px;
+    background-color: rgba(253, 81, 45, 0.38);
 }

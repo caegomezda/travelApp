@@ -6,25 +6,51 @@ import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewChild } fr
 
 import { Geolocation } from '@capacitor/geolocation';
 import { GoogleMapsService } from '../zservices/google-maps.service';
+import { AlertController } from '@ionic/angular';
 
 // const {Geolocation} = Plugins;
-declare var google: any;
+// declare var google: any;
 
 declare var google;
+
+// interface para los marcadores externos
+interface Marker {
+  position: {
+    lat: number,
+    lng: number,
+  };
+}
+
+
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
   styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements OnInit {
-  // map = null; parte del codigo de integracion temporal
+  
+  // array de markers
+  markers: Marker[] = [
+    {
+      position: {
+        lat: 5.0514684683498391,
+        lng: -75.489938501083023,
+      }
+    },
+    {
+      position: {
+        lat: 5.0546330167657505,
+        lng: -75.49148403333304,
+      }
+    }
+  ];
   
 
-
   @Input () position = {
-    lat: -2.898116,
-    lng: -78.99958149999999
+    lat: 5.0507972,
+    lng: -75.4927164
   };
+
   label = {
     titulo: 'Mi ubicación',
     subtitulo: 'Mi ubicación '
@@ -40,6 +66,7 @@ export class PrincipalPage implements OnInit {
 constructor(private renderer:Renderer2,
             @Inject(DOCUMENT) private document,
             private googlemapsService: GoogleMapsService,
+            private alertController : AlertController
             // public modalController: ModalController
             ) {
               // console.log(google);
@@ -49,6 +76,7 @@ constructor(private renderer:Renderer2,
 ngOnInit(): void {
   this.init();
   this.myLocation();
+  
   // this.initMap();
 }
 async init() {
@@ -69,7 +97,7 @@ let mapOptions = {
       clickableIcons: false,
 };
 
-
+// Seleccionamos donde estara  nuestro mapa
 this.map = new google.maps.Map(this.divMap.nativeElement,mapOptions);
 
 this.marker = new google.maps.Marker({
@@ -85,6 +113,8 @@ this.infowindow = new google.maps.InfoWindow();
     this.setInfoWindow(this.marker, this.label.titulo, this.label.subtitulo)
     
 // }
+
+this.renderMarkers();
 
 }
 
@@ -103,7 +133,26 @@ addMarker(position: any): void {
   this.marker.setPosition(latLng);
   this.map.panTo(position);
   this.positionSet = position;
+ 
 }
+
+// funcion que renderisa todos los markers de el array 
+renderMarkers() {
+  this.markers.forEach(marker => {
+    this.addMarkers(marker);
+  });
+}
+
+// funcion addMarkers: pinta los markers del arreglo
+addMarkers(marker: Marker) {
+  return new google.maps.Marker({
+    position: marker.position,
+    icon: 'assets/icon/car-sport.svg',
+    map: this.map
+  });
+}
+
+
 
 setInfoWindow(marker: any, titulo: string, subtitulo: string) {
   const contentString = '<div id="contentInsideMap">'+
@@ -127,35 +176,35 @@ async myLocation() {
                lng: res.coords.longitude,
         }
          this.addMarker(position);
+         
+         
   });
 }
 
 aceptar() {
-  console. log('click aceptar ->',this. positionSet);
+  console. log('click aceptar ->',this.positionSet);
+  this.presentAlertConfirm()
 }
-                                    
 
+async presentAlertConfirm() {
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    mode:'ios',
+    message: 'Realizando el pedido ...',
+    buttons: [
+      {
+        text: 'Rechazar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        id: 'cancel-button',
+      }, {
+        text: 'Aceptar',
+      }
+    ]
+  });
 
-  // integracion temporal del mapa- se cambio a geolocation
-  // loadMap() {
-  //   // create a new map by passing HTMLElement
-  //   const mapEle: HTMLElement = document.getElementById('map');
-  //   // create LatLng object
-  //   const myLatLng = {lat: 5.058859029717547, lng: -75.48927077310586};
-  //   // create map
-  //   this.map = new google.maps.Map(mapEle, {
-  //     center: myLatLng,
-  //     zoom: 17
-  //   });
-  
-  //   google.maps.event.addListenerOnce(this.map, 'idle', () => {
-  //     // this.renderMarkers();
-  //     mapEle.classList.add('show-map');
-  //   });
-  // }
+  await alert.present();
+}
 
-  // ngOnInit() {
-  //   // this.loadMap(); parte del codigo temporal 
-  // }
 
 }
