@@ -50,6 +50,10 @@ const routes: Routes = [
     path: 'driver-map',
     loadChildren: () => import('./driver-map/driver-map.module').then( m => m.DriverMapPageModule)
   },
+  {
+    path: 'menu-principal',
+    loadChildren: () => import('./menu-principal/menu-principal.module').then( m => m.MenuPrincipalPageModule)
+  },
 
   
 ];

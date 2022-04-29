@@ -1,0 +1,32 @@
+
+<ion-content>
+<div class="main-container-div">
+  <!-- <ion-button slot="start" class="menu-btn"> -->
+    <!-- <ion-menu-button color="ligth"></ion-menu-button> -->
+    <ion-icon routerLink="/login" class="menu-btn" name="exit-outline"></ion-icon>
+  <!-- </ion-button> -->
+
+  <div class="user-div">
+      <div class="first-div" slot="end" >
+        <ion-label class="welcome">Bienvenid@</ion-label>
+        <ion-label class="name">Santiago</ion-label>
+      </div>
+      <img src="assets/img/icono-travel.png">
+  </div>
+
+  <div class="content-div animated bounceInUp" >
+    <ion-label class="hello">Hola,Selecciona un servicio </ion-label>
+
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="6" (click)="goToSubject(item)" *ngFor="let item of (subjects )">
+          <div class="col-div">
+            <img src="{{item.icon}}" >
+            <ion-label>{{item.name}}</ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</div>
+</ion-content>

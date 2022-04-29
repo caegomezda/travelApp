@@ -17,31 +17,41 @@
   <form id="form">
     <ion-list>
 
-      <ion-item>
+      <ion-button slot="end" (click)="editData()">Editar
+        <ion-icon id="pencil" slot="end" name="pencil-sharp"></ion-icon>
+      </ion-button>
+
+      <ion-item >
         <ion-icon slot="start" name="person-circle-outline"></ion-icon>
         <ion-label class="ion-text-wrap">Nombre<br> <h2>Camilo Gomez</h2></ion-label>
-        <ion-icon id="pencil" slot="end" name="pencil-sharp"></ion-icon>
+        
+        
       </ion-item>
 
+      <ion-item *ngIf="edit">
+        <ion-input placeholder="Nuevo nombre"></ion-input>
+      </ion-item>
+      
       <ion-item>
         <ion-icon slot="start" name="mail-sharp"></ion-icon>
         <ion-label class="ion-text-wrap">Correo <br> <h2>Camilo72@gmail.com</h2></ion-label>
-        <ion-icon id="pencil" slot="end" name="pencil-sharp"></ion-icon>
+      </ion-item>
+
+      <ion-item *ngIf="edit">
+        <ion-input placeholder="Nuevo correo"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-icon slot="start" name="call-sharp"></ion-icon>
         <ion-label class="ion-text-wrap">Telefono <br> <h2>+57 312 400 5971</h2></ion-label>
-        <ion-icon id="pencil" slot="end" name="pencil-sharp"></ion-icon>
       </ion-item>
 
-      <ion-item>
-        <ion-icon slot="start" name="lock-closed-sharp"></ion-icon>
-        <h2>Cambiar contraseña</h2>
-        <ion-icon id="pencil" slot="end" name="pencil-sharp"></ion-icon>
+      <ion-item *ngIf="edit">
+        <ion-input placeholder="Nuevo telefono"></ion-input>
       </ion-item>
       
     </ion-list>
+    <app-button (click)="saveData()" *ngIf="edit" texto="Guardar cambios"></app-button>
   </form>  
 </ion-content>
 

@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
+  edit: boolean = false;
   constructor() { }
 
   ngOnInit() {
   }
 
+  editData(){
+    this.edit=true;
+  }
+  saveData(){
+    this.edit=false;
+  }
 }
