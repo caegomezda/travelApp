@@ -54,6 +54,10 @@ const routes: Routes = [
     path: 'menu-principal',
     loadChildren: () => import('./menu-principal/menu-principal.module').then( m => m.MenuPrincipalPageModule)
   },
+  {
+    path: 'data-driver',
+    loadChildren: () => import('./data-driver/data-driver.module').then( m => m.DataDriverPageModule)
+  },
 
   
 ];

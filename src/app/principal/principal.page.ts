@@ -6,7 +6,8 @@ import { Component, ElementRef, Inject, Input, OnInit, Renderer2, ViewChild } fr
 
 import { Geolocation } from '@capacitor/geolocation';
 import { GoogleMapsService } from '../zservices/google-maps.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 // const {Geolocation} = Plugins;
 // declare var google: any;
@@ -66,7 +67,9 @@ export class PrincipalPage implements OnInit {
 constructor(private renderer:Renderer2,
             @Inject(DOCUMENT) private document,
             private googlemapsService: GoogleMapsService,
-            private alertController : AlertController
+            private alertController : AlertController,
+            private loandingCtrl: LoadingController,
+            private router: Router
             // public modalController: ModalController
             ) {
               // console.log(google);
@@ -199,11 +202,27 @@ async presentAlertConfirm() {
         id: 'cancel-button',
       }, {
         text: 'Aceptar',
+        handler: () => {
+            this.presentLoading();
+            this.router.navigateByUrl('/data-driver', {replaceUrl: true});
+          }
       }
     ]
   });
 
   await alert.present();
+}
+
+async presentLoading() {
+  const loading = await this.loandingCtrl.create({
+    cssClass: 'my-custom-class',
+    message: 'Realizando pedido...',
+    duration: 1000
+  });
+  await loading.present();
+
+  // const { role, data } = await loading.onDidDismiss();
+  // console.log('Loading dismissed!');
 }
 
 
