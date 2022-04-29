@@ -103,6 +103,22 @@ export class FireBaseService {
 
   //https://travel-app-v1-e684f-default-rtdb.firebaseio.com/user-api/-N0Z_TuTS4A965V-SJCz
 
+  async getAccountData(){
+    let credential = {
+      uid:  await this.utilities.getIdUser(),
+      token:  await this.utilities.getToken()
+    }
+    console.log('credential',credential);
+
+    let result  = await this.fetchUserInfo2Api(credential,1);
+
+    console.log('result',result);
+    console.log('_________________________________________________________________________________________');
+    let data = await this.getData(result);
+    console.log('data___________',data);
+    return data
+  }
+
   async fetchUserInfo2Api(credential,urlType){
     let url = await this.getUrlType(urlType)
     let uid = credential["uid"];
@@ -111,20 +127,12 @@ export class FireBaseService {
     console.log('apiUrl',apiUrl);
     let json = {}
     json = JSON.stringify(json);
-    return this.http.get(`${apiUrl}`, json).pipe(map( data => data)).toPromise();
+    console.log('json',json);
+    let result =  await this.http.get(`${apiUrl}`, json).pipe(map( data => data)).toPromise();
+    console.log('result__________________________________________________',result);
+    return  this.http.get(`${apiUrl}`, json).pipe(map( data => data)).toPromise();
   }
 
-  async getAccountData(){
-    let credential = {
-      uid:  await this.utilities.getIdUser(),
-      token:  await this.utilities.getToken()
-    }
-    console.log('credential',credential);
-    let result  = await this.fetchUserInfo2Api(credential,1);
-    let data = await this.getData(result)
-    console.log('data',data);
-    return data
-  }
 
   async getData(dataJson){
     let data = [];

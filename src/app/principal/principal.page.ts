@@ -81,8 +81,17 @@ ngOnInit(): void {
 }
 
 ionViewWillEnter(){
-  this.userData = this.utilities.getDataUser();
+  this.getUserData();
+  // console.log('this.userData',this.userData);
+}
+
+async getUserData(){
+  let result = await this.utilities.getDataUser();
+  console.log('result',result);
+  this.userData = result
+  console.log('___________________________________');
   console.log('this.userData',this.userData);
+
 }
 
 async init() {

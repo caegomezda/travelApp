@@ -7,10 +7,12 @@ export const environment = {
   firebaseConfig: {
     apiKey: "AIzaSyBhIrOxCGZwLnz9SzV5L1FSUP6nby2cVq0",
     authDomain: "travel-app-v1-e684f.firebaseapp.com",
-    databaseURL: "YOUR_DATABASE_URL",
+    databaseURL: "https://travel-app-v1-e684f-default-rtdb.firebaseio.com",
     projectId: "travel-app-v1-e684f",
     storageBucket: "travel-app-v1-e684f.appspot.com",
     messagingSenderId: "560108629560",
+
+    appId:"1:560108629560:web:4f1041187ca63318b680cd",
     measurementId: "G-5FH4XQX77Z"
   },
 

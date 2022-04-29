@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LoginPage } from '../login/login.page';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ export class UtilitiesService {
   token:any;
   item:any;
   correoUsuario:any;
+  dataUser:any;
 
   constructor() { }
 
@@ -36,12 +38,15 @@ export class UtilitiesService {
     return this.token;
   }
 
-  getDataUser(){
-    return this.getDataUser;
+  async getDataUser(){
+    console.log('this.dataUser',this.dataUser);
+    return await this.dataUser;
   }
 
-  saveDataUser(data){
-    this.getDataUser = data;
+  async saveDataUser(data){
+    console.log('_______________________________________________________');
+    console.log('data',data);
+    this.dataUser = await data;
   }
 
 }

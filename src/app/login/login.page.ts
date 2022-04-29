@@ -45,13 +45,15 @@ export class LoginPage implements OnInit {
       let emailUsu =this.credentialForm.value['email'];
       const loading = await this.loadingController.create();
       await loading.present();
+
       this.firebaseService.signIn(newCredencialValue.value).then( async res =>{
         if(this.firebaseService.isEmailVerified){      
           this.usuarioInfo.getUsu(emailUsu)
           loading.dismiss();
           await this.utilities.saveIdUser(res.user.uid);
           await this.utilities.saveTokenUser(res.user.getIdToken());
-          await this.firebaseService.getAccountData();
+          await this.loadDataFromApi();
+          // await this.firebaseService.getAccountData();
           this.router.navigateByUrl('/principal', {replaceUrl: true});
         }else{
           loading.dismiss();
@@ -71,6 +73,13 @@ export class LoginPage implements OnInit {
     }
   }
   
+  async loadDataFromApi(){
+    console.log('AQUI EMPIEZA TODO___________________________________________________________________________________');
+    console.log(' this.utilities.getToken()', this.utilities.getToken());
+    console.log('this.utilities.getIdUser()',this.utilities.getIdUser());
+    await this.firebaseService.getAccountData();
+  }
+
   get email(){
     return this.credentialForm.get('email');
   }
