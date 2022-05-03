@@ -47,6 +47,14 @@ ion-content {
         padding-top: 30px;
         text-align: right;
 
+        ion-item{
+            border-radius: 50px;
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            --background: white ;
+        }
+
         .hello{
             color: white;
             font-weight: 600;
@@ -56,12 +64,13 @@ ion-content {
             margin-top: 10px;
         }
         .date{
-            color: white;
+            color: #fd512d;
             font-weight: 500;
             font-size: 18px;
             margin-bottom: 20px;
-            padding-left: 5px;
-            margin-top: 40px;
+            padding-left: 44px;
+            margin-top: 22px;
+            text-align: justify;
         }
     }
 }
