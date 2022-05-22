@@ -9,12 +9,14 @@ import { DriverPageRoutingModule } from './driver-routing.module';
 import { DriverPage } from './driver.page';
 import { ButtonModule } from '../components/button/button.module';
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ButtonModule,
+    
     DriverPageRoutingModule
   ],
   declarations: [DriverPage]
