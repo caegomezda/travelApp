@@ -38,22 +38,38 @@ export class FireBaseService {
   }
 
   async signUp(credentialForm){
-    let email = credentialForm.email
-    let password = credentialForm.password
+    let email = credentialForm.email;
+    let password = credentialForm.password;
+    await this.userCreationRealTimeData({email,password});
+    return
+  }
+
+  async userCreationRealTimeData({ email, password }): Promise<any>{
     const credential = await this.afAuth.createUserWithEmailAndPassword(
       email,
       password
     );
-    const uid = credential.user.uid;
-    return this.afs.doc(
-    `user/${uid}`
-    ).set({
-      uid,
-      email:email,
-      phone:" ",
-      password:password,
-      type:"user"
-    });
+    let creationTime = credential.user.metadata.creationTime;
+    let uid = credential.user.uid;
+    let newForm = {
+        email: email,
+        name:"",
+        creationDate:creationTime,
+        uid:uid,
+        isActive:true,
+        phone:"",
+        userType:"user"
+    }
+    this.afs.doc(
+      `user/${uid}`
+      ).set({
+        email: email,
+        name:"",
+        creationDate:creationTime,
+        password: password,
+        uid:uid,
+      });
+    await this.AddInstance(credential,newForm,1);
   }
 
   async SendVerificationMail() {
@@ -62,31 +78,27 @@ export class FireBaseService {
     })
   }
 
-  async AddNewUser(credential,form){
-    let uid = credential.user.uid;
-    let accessToken = credential.user._delegate.accessToken
-    const apiUrl = `${this.userURL}${uid}.json?auth=${accessToken}`;
+  async AddInstance(credential,form,urlType){
+    // let uid = credential.user.uid;
+    let url = await this.getUrlType(urlType)
+    let accessToken = credential.user._delegate.accessToken;
+    const apiUrl = `${url}.json?auth=${accessToken}`;
     let json = form
     json = JSON.stringify(json);
     return this.http.post(`${apiUrl}`, json, this.httpOptions).pipe(map( data => data)).toPromise();
   }
 
-  async AddNewDriver(credential,form){
-    let uid = credential.user.uid;
-    let accessToken = credential.user._delegate.accessToken
-    const apiUrl = `${this.driverURL}${uid}.json?auth=${accessToken}`;
-    let json = form
-    json = JSON.stringify(json);
-    return this.http.post(`${apiUrl}`, json, this.httpOptions).pipe(map( data => data)).toPromise();
-  }
-
-  async AddNewMovement(credential,form){
-    let uid = credential.user.uid;
-    let accessToken = credential.user._delegate.accessToken
-    const apiUrl = `${this.movementURL}${uid}.json?auth=${accessToken}`;
-    let json = form
-    json = JSON.stringify(json);
-    return this.http.post(`${apiUrl}`, json, this.httpOptions).pipe(map( data => data)).toPromise();
+  getUrlType(urlType){
+    switch (urlType) {
+      case 1:
+        return this.userURL;
+      case 2:
+        return this.driverURL;
+      case 3:
+        return this.movementURL;
+      default:
+        break;
+    }
   }
   
 }

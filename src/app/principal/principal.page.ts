@@ -79,6 +79,7 @@ constructor(private renderer:Renderer2,
 ngOnInit(): void {
   this.init();
   this.myLocation();
+  Geolocation.requestPermissions();
   
   // this.initMap();
 }

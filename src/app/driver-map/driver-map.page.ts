@@ -15,8 +15,8 @@ declare var google;
 export class DriverMapPage implements OnInit {
 
   @Input () position = {
-    lat: -2.898116,
-    lng: -78.99958149999999
+    lat: 5.0507972,
+    lng: -75.4927164
   };
   label = {
     titulo: 'Mi ubicación',
@@ -45,7 +45,7 @@ constructor(private renderer:Renderer2,
 ngOnInit(): void {
   this.init();
   this.myLocation();
-  // this.initMap();
+  Geolocation.requestPermissions();
 }
 
 ionViewWillEnter(){
