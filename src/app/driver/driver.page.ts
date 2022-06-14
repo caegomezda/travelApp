@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ComponentsIonicService } from '../zservices/components-ionic.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { SesionService } from 'src/services/sesion.service';
 
 @Component({
   selector: 'app-driver',
@@ -10,8 +10,13 @@ import { AlertController } from '@ionic/angular';
 })
 export class DriverPage implements OnInit {
 
-  constructor(public alertController: AlertController,
-    private router: Router) { }
+  constructor(private alertController: AlertController,
+              private router: Router,
+              private sesion: SesionService) { }
+
+  ionViewWillEnter(){
+    this.sesion.sesionCaller()
+  }
 
   ngOnInit() {
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SesionService } from 'src/services/sesion.service';
 
 @Component({
   selector: 'app-terminos',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TerminosPage implements OnInit {
 
-  constructor() { }
+  constructor(private sesion: SesionService) { }
 
+  ionViewWillEnter(){
+    this.sesion.sesionCaller()
+  }
+  
   ngOnInit() {
   }
 

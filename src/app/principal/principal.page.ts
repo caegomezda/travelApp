@@ -8,6 +8,7 @@ import { Geolocation } from '@capacitor/geolocation';
 import { GoogleMapsService } from '../zservices/google-maps.service';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { SesionService } from 'src/services/sesion.service';
 
 // const {Geolocation} = Plugins;
 // declare var google: any;
@@ -64,167 +65,169 @@ export class PrincipalPage implements OnInit {
   @ViewChild('map') divMap: ElementRef;
 
 
-constructor(private renderer:Renderer2,
-            @Inject(DOCUMENT) private document,
-            private googlemapsService: GoogleMapsService,
-            private alertController : AlertController,
-            private loandingCtrl: LoadingController,
-            private router: Router
-            // public modalController: ModalController
-            ) {
-              // console.log(google);
-             }
+  constructor(private renderer:Renderer2,
+              private googlemapsService: GoogleMapsService,
+              private alertController : AlertController,
+              private loandingCtrl: LoadingController,
+              private router: Router,
+              private sesion: SesionService,
+              @Inject(DOCUMENT) private document,
+              // public modalController: ModalController
+              ){}
 
+  ionViewWillEnter(){
+    this.sesion.sesionCaller()
+  }             
 
-ngOnInit(): void {
-  this.init();
-  this.myLocation();
-  Geolocation.requestPermissions();
-  
-  // this.initMap();
-}
-async init() {
-  this.googlemapsService.init(this.renderer, this.document). then( () =>{
-          this.initMap();
-  }).catch( (err) => {
-         console. log(err);
-  });
-}
-
-initMap() {
-const position = this.position;
-let latLng = new google.maps.LatLng (position.lat, position.lng);
-let mapOptions = {
-      center: latLng,
-      zoom: 15,
-      disableDefaultUI: true,
-      clickableIcons: false,
-};
-
-// Seleccionamos donde estara  nuestro mapa
-this.map = new google.maps.Map(this.divMap.nativeElement,mapOptions);
-
-this.marker = new google.maps.Marker({
-      map: this.map,
-      animation: google.maps.Animation.DROP,
-      draggable: true,
-});
-
-this.clickHandleEvent ();
-this.infowindow = new google.maps.InfoWindow();
-// if (this.label.titulo.length) {
-    this. addMarker (position);
-    this.setInfoWindow(this.marker, this.label.titulo, this.label.subtitulo)
+  ngOnInit(): void {
+    this.init();
+    this.myLocation();
+    Geolocation.requestPermissions();
     
-// }
+    // this.initMap();
+  }
+  async init() {
+    this.googlemapsService.init(this.renderer, this.document). then( () =>{
+            this.initMap();
+    }).catch( (err) => {
+          console. log(err);
+    });
+  }
 
-this.renderMarkers();
+  initMap() {
+    const position = this.position;
+    let latLng = new google.maps.LatLng (position.lat, position.lng);
+    let mapOptions = {
+          center: latLng,
+          zoom: 15,
+          disableDefaultUI: true,
+          clickableIcons: false,
+    };
 
-}
+    // Seleccionamos donde estara  nuestro mapa
+    this.map = new google.maps.Map(this.divMap.nativeElement,mapOptions);
 
-clickHandleEvent() {
-this.map.addListener('click', (event: any) => {
-      const position = {
-            lat: event. latLng. lat(),
-            lng: event. latLng. lng(),
-      };
-      this.addMarker(position);
-});
-}
+    this.marker = new google.maps.Marker({
+          map: this.map,
+          animation: google.maps.Animation.DROP,
+          draggable: true,
+    });
 
-addMarker(position: any): void {
-  let latLng = new google.maps.LatLng (position. lat, position.lng);
-  this.marker.setPosition(latLng);
-  this.map.panTo(position);
-  this.positionSet = position;
- 
-}
+    this.clickHandleEvent ();
+    this.infowindow = new google.maps.InfoWindow();
+    // if (this.label.titulo.length) {
+        this. addMarker (position);
+        this.setInfoWindow(this.marker, this.label.titulo, this.label.subtitulo)
+        
+    // }
 
-// funcion que renderisa todos los markers de el array 
-renderMarkers() {
-  this.markers.forEach(marker => {
-    this.addMarkers(marker);
-  });
-}
+    this.renderMarkers();
 
-// funcion addMarkers: pinta los markers del arreglo
-addMarkers(marker: Marker) {
-  return new google.maps.Marker({
-    position: marker.position,
-    icon: 'assets/icon/car-sport.svg',
-    map: this.map
-  });
-}
+  }
 
-
-
-setInfoWindow(marker: any, titulo: string, subtitulo: string) {
-  const contentString = '<div id="contentInsideMap">'+
-                        '<p style="font-weight: bold; margin-bottom: 5px;">'+ titulo + '</p>'
-                        '<div id="bodyContent">' +
-                        '<p>'+ subtitulo + '</p>'+
-                        '</div>'+
-                        '</div>';
-  this.infowindow.setContent(contentString);
-  this.infowindow.open(this.map, marker);
-}
-
-async myLocation() {
-  console.log('mylocation() click')
-  Geolocation.getCurrentPosition().then( (res) => {
-
-         console. log('my location() - > get')
-
+  clickHandleEvent() {
+  this.map.addListener('click', (event: any) => {
         const position = {
-               lat: res.coords.latitude,
-               lng: res.coords.longitude,
-        }
-         this.addMarker(position);
-         
-         
+              lat: event. latLng. lat(),
+              lng: event. latLng. lng(),
+        };
+        this.addMarker(position);
   });
-}
+  }
 
-aceptar() {
-  console. log('click aceptar ->',this.positionSet);
-  this.presentAlertConfirm()
-}
+  addMarker(position: any): void {
+    let latLng = new google.maps.LatLng (position. lat, position.lng);
+    this.marker.setPosition(latLng);
+    this.map.panTo(position);
+    this.positionSet = position;
+  
+  }
 
-async presentAlertConfirm() {
-  const alert = await this.alertController.create({
-    cssClass: 'my-custom-class',
-    mode:'ios',
-    message: 'Realizando el pedido ...',
-    buttons: [
-      {
-        text: 'Rechazar',
-        role: 'cancel',
-        cssClass: 'secondary',
-        id: 'cancel-button',
-      }, {
-        text: 'Aceptar',
-        handler: () => {
-            this.presentLoading();
-            this.router.navigateByUrl('/data-driver', {replaceUrl: true});
+  // funcion que renderisa todos los markers de el array 
+  renderMarkers() {
+    this.markers.forEach(marker => {
+      this.addMarkers(marker);
+    });
+  }
+
+  // funcion addMarkers: pinta los markers del arreglo
+  addMarkers(marker: Marker) {
+    return new google.maps.Marker({
+      position: marker.position,
+      icon: 'assets/icon/car-sport.svg',
+      map: this.map
+    });
+  }
+
+
+
+  setInfoWindow(marker: any, titulo: string, subtitulo: string) {
+    const contentString = '<div id="contentInsideMap">'+
+                          '<p style="font-weight: bold; margin-bottom: 5px;">'+ titulo + '</p>'
+                          '<div id="bodyContent">' +
+                          '<p>'+ subtitulo + '</p>'+
+                          '</div>'+
+                          '</div>';
+    this.infowindow.setContent(contentString);
+    this.infowindow.open(this.map, marker);
+  }
+
+  async myLocation() {
+    console.log('mylocation() click')
+    Geolocation.getCurrentPosition().then( (res) => {
+
+          console. log('my location() - > get')
+
+          const position = {
+                lat: res.coords.latitude,
+                lng: res.coords.longitude,
           }
-      }
-    ]
-  });
+          this.addMarker(position);
+          
+          
+    });
+  }
 
-  await alert.present();
-}
+  aceptar() {
+    console. log('click aceptar ->',this.positionSet);
+    this.presentAlertConfirm()
+  }
 
-async presentLoading() {
-  const loading = await this.loandingCtrl.create({
-    cssClass: 'my-custom-class',
-    message: 'Realizando pedido...',
-    duration: 1000
-  });
-  await loading.present();
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      mode:'ios',
+      message: 'Realizando el pedido ...',
+      buttons: [
+        {
+          text: 'Rechazar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+              this.presentLoading();
+              this.router.navigateByUrl('/data-driver', {replaceUrl: true});
+            }
+        }
+      ]
+    });
 
-  // const { role, data } = await loading.onDidDismiss();
-  // console.log('Loading dismissed!');
-}
+    await alert.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loandingCtrl.create({
+      cssClass: 'my-custom-class',
+      message: 'Realizando pedido...',
+      duration: 1000
+    });
+    await loading.present();
+
+    // const { role, data } = await loading.onDidDismiss();
+    // console.log('Loading dismissed!');
+  }
 
 
 }

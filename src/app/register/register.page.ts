@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { isReactNative } from '@firebase/util';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { SesionService } from 'src/services/sesion.service';
 import { FireBaseService } from '../zservices/fire-base.service';
 import { UtilitiesService } from '../zservices/utilities.service';
 
@@ -31,7 +32,12 @@ export class RegisterPage implements OnInit {
               private firebaseService: FireBaseService,
               private router: Router,
               private afAuth: AngularFireAuth,
+              private sesion: SesionService,
   ) { }
+
+  // ionViewWillEnter(){
+  //   this.sesion.sesionCaller()
+  // }
 
   ngOnInit(){
     this.credentialFormSignUp = this.fb.group({
@@ -41,8 +47,6 @@ export class RegisterPage implements OnInit {
 
     });
   }
-
-
 
   async  signUp(){
       const loading = await this.loadingController.create();

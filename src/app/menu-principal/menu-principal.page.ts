@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { SesionService } from 'src/services/sesion.service';
 
 @Component({
   selector: 'app-menu-principal',
@@ -7,8 +8,13 @@ import { Router, NavigationExtras } from '@angular/router';
   styleUrls: ['./menu-principal.page.scss'],
 })
 export class MenuPrincipalPage implements OnInit {
-subjects;
-  constructor(private router: Router) { }
+  subjects;
+  constructor(private router: Router,
+              private sesion: SesionService ) { }
+
+  ionViewWillEnter(){
+    this.sesion.sesionCaller()
+  }
 
   ngOnInit() {
     this.subjects=[

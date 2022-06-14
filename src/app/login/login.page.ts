@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
       if(this.firebaseService.isEmailVerified) {      
         this.usuarioInfo.getUsu(emailUsu)
         loading.dismiss();
-        this.router.navigateByUrl('/principal', {replaceUrl: true});
+        this.router.navigateByUrl('/menu-principal', {replaceUrl: true});
       } else {
         loading.dismiss();
         this.isNotVerified();
