@@ -12,6 +12,8 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,12 +26,15 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
       AngularFireModule.initializeApp(environment.firebaseConfig),
       AngularFireAuthModule,
       AngularFirestoreModule,
-      HttpClientModule
+      HttpClientModule,
+      
     ],
 
   providers: [
     HttpClient,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    NativeGeocoder
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -11,12 +11,36 @@ import { GoogleMapsService } from '../zservices/google-maps.service';
 declare var google: any;
 
 declare var google;
+
+// interface para los marcadores externos
+interface Marker {
+  position: {
+    lat: number,
+    lng: number,
+  };
+}
+
 @Component({
   selector: 'app-intermunicipal',
   templateUrl: './intermunicipal.page.html',
   styleUrls: ['./intermunicipal.page.scss'],
 })
 export class IntermunicipalPage implements OnInit {
+
+  markers: Marker[] = [
+    {
+      position: {
+        lat: 5.0514684683498391,
+        lng: -75.489938501083023,
+      }
+    },
+    {
+      position: {
+        lat: 5.0546330167657505,
+        lng: -75.49148403333304,
+      }
+    }
+  ];
 
   @Input () position = {
     lat: 5.0507972,
@@ -135,6 +159,22 @@ async myLocation() {
 aceptar() {
   console. log('click aceptar ->',this.positionSet);
 
+}
+
+// funcion que renderisa todos los markers de el array 
+renderMarkers() {
+  this.markers.forEach(marker => {
+    this.addMarkers(marker);
+  });
+}
+
+// funcion addMarkers: pinta los markers del arreglo
+addMarkers(marker: Marker) {
+  return new google.maps.Marker({
+    position: marker.position,
+    icon: 'assets/icon/car-sport.svg',
+    map: this.map
+  });
 }
 
 

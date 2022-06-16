@@ -9,10 +9,13 @@ import { GoogleMapsService } from '../zservices/google-maps.service';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
+// Geocoder
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
+
 // const {Geolocation} = Plugins;
 // declare var google: any;
 
-declare var google;
+declare var google; 
 
 // interface para los marcadores externos
 interface Marker {
@@ -59,7 +62,14 @@ export class PrincipalPage implements OnInit {
   map: any;
   marker: any;
   infowindow: any;
-  positionSet: any
+  positionSet: any;
+ 
+  geocoderOptions: NativeGeocoderOptions = {
+          useLocale: true,
+          maxResults: 5
+    };
+
+  
   // public search:string='';
   @ViewChild('map') divMap: ElementRef;
 
@@ -69,7 +79,8 @@ constructor(private renderer:Renderer2,
             private googlemapsService: GoogleMapsService,
             private alertController : AlertController,
             private loandingCtrl: LoadingController,
-            private router: Router
+            private router: Router,
+            private nativeGeocoder: NativeGeocoder
             // public modalController: ModalController
             ) {
               // console.log(google);
@@ -186,7 +197,8 @@ async myLocation() {
 
 aceptar() {
   console. log('click aceptar ->',this.positionSet);
-  this.presentAlertConfirm()
+  this.presentAlertConfirm();
+  this.reverseGeocoder(this.positionSet);
 }
 
 async presentAlertConfirm() {
@@ -224,6 +236,20 @@ async presentLoading() {
   // const { role, data } = await loading.onDidDismiss();
   // console.log('Loading dismissed!');
 }
+// funcion geocoderreverse
+reverseGeocoder(position){
+  return this.nativeGeocoder.reverseGeocode(position.lat,position.lng,this.geocoderOptions)
+    .then((result:NativeGeocoderResult[])=>{
+      console.log(JSON.stringify(result[0].thoroughfare));
+      return result[0];
+    })
+    .catch((error:any)=>{
+      console.log(error);
+      throw(error);
+    });
+  }
+
+
 
 
 }
